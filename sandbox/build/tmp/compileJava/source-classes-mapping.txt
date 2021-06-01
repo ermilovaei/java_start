@@ -1,2 +1,2 @@
-Myfirst.java
- Myfirst
+ru/stqa/stjv/sandbox/Myfirst.java
+ ru.stqa.stjv.sandbox.Myfirst
