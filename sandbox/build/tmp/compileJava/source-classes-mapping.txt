@@ -1,2 +1,6 @@
 ru/stqa/stjv/sandbox/Myfirst.java
  ru.stqa.stjv.sandbox.Myfirst
+ru/stqa/stjv/sandbox/Point.java
+ ru.stqa.stjv.sandbox.Point
+ru/stqa/stjv/sandbox/MyMain.java
+ ru.stqa.stjv.sandbox.MyMain
