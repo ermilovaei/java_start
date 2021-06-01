@@ -8,7 +8,7 @@ public class Point {
     this.coordY = y;
   }
 
-  // расстояние от точки то точки p2
+  // расстояние от точки до точки p2
   public double distance(Point p2) {
     return  (Math.sqrt (Math.pow ((this.coordX - p2.coordX), 2) + Math.pow ((this.coordY - p2.coordY),2)));
   }
