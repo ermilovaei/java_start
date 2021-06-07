@@ -26,6 +26,9 @@ public class HelperBase {
     click(locator);
     new Select(wd.findElement(locator)).selectByVisibleText(text);
   }
+  public void alertAccept() {
+    wd.switchTo().alert().accept();
+  }
 
   public boolean isElementPresent(By by) {
     try {
