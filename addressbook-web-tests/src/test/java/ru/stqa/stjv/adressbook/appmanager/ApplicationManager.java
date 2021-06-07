@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   WebDriver wd;
+  private NavigationHelper navigationHelper;
   private ContactHelper contactHelper;
   private GroupHelper groupHelper;
 
@@ -18,12 +19,8 @@ public class ApplicationManager {
    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
    groupHelper = new GroupHelper(wd);
    contactHelper = new ContactHelper(wd);
+   navigationHelper = new NavigationHelper(wd);
    login();
-  }
-
-  public void returnToHomePage() {
-
-    wd.findElement(By.linkText("home page")).click();
   }
 
   private void login() {
@@ -38,10 +35,6 @@ public class ApplicationManager {
 
   public void stop() {
     wd.quit();
-  }
-
-  public void goToGroupsPage() {
-    wd.findElement(By.linkText("groups")).click();
   }
 
   private boolean isElementPresent(By by) {
@@ -68,5 +61,9 @@ public class ApplicationManager {
 
   public ContactHelper getContactHelper() {
     return contactHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }
