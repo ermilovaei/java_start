@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   WebDriver wd;
+  private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private ContactHelper contactHelper;
   private GroupHelper groupHelper;
@@ -20,18 +21,10 @@ public class ApplicationManager {
    groupHelper = new GroupHelper(wd);
    contactHelper = new ContactHelper(wd);
    navigationHelper = new NavigationHelper(wd);
-   login();
+   sessionHelper = new SessionHelper(wd);
+   sessionHelper.login("admin", "secret");
   }
 
-  private void login() {
-    wd.get("http://localhost/addressbook/addressbook/index.php");
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-  }
 
   public void stop() {
     wd.quit();
