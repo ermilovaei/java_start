@@ -3,6 +3,7 @@ package ru.stqa.stjv.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.stjv.adressbook.model.contactData;
@@ -10,78 +11,79 @@ import ru.stqa.stjv.adressbook.model.contactData;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-
-  private final GroupHelper groupHelper = new GroupHelper();
+   WebDriver wd;
+  private GroupHelper groupHelper;
 
   public void init() {
-    groupHelper.wd = new FirefoxDriver();
-    groupHelper.wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+   wd = new FirefoxDriver();
+   wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+   groupHelper = new GroupHelper(wd);
     login();
   }
 
   public void returnToHomePage() {
 
-    groupHelper.wd.findElement(By.linkText("home page")).click();
+    wd.findElement(By.linkText("home page")).click();
   }
 
   public void submitContactCreation() {
 
-    groupHelper.wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
   public void fillContactData(contactData contactData) {
-    groupHelper.wd.findElement(By.name("firstname")).click();
-    groupHelper.wd.findElement(By.name("firstname")).clear();
-    groupHelper.wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-    groupHelper.wd.findElement(By.name("lastname")).click();
-    groupHelper.wd.findElement(By.name("lastname")).clear();
-    groupHelper.wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-    groupHelper.wd.findElement(By.name("address")).click();
-    groupHelper.wd.findElement(By.name("address")).clear();
-    groupHelper.wd.findElement(By.name("address")).sendKeys(contactData.getAdress());
-    groupHelper.wd.findElement(By.name("home")).click();
-    groupHelper.wd.findElement(By.name("home")).clear();
-    groupHelper.wd.findElement(By.name("home")).sendKeys(contactData.getTelephoneHome());
-    groupHelper.wd.findElement(By.name("email")).click();
-    groupHelper.wd.findElement(By.name("email")).clear();
-    groupHelper.wd.findElement(By.name("email")).sendKeys(contactData.getEmailFirst());
-    groupHelper.wd.findElement(By.name("bday")).click();
-    new Select(groupHelper.wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getbDate());
-    groupHelper.wd.findElement(By.name("bday")).click();
-    groupHelper.wd.findElement(By.name("bmonth")).click();
-    new Select(groupHelper.wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getbMonth());
-    groupHelper.wd.findElement(By.name("bmonth")).click();
-    groupHelper.wd.findElement(By.name("byear")).click();
-    groupHelper.wd.findElement(By.name("byear")).clear();
-    groupHelper.wd.findElement(By.name("byear")).sendKeys(contactData.getbYear());
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
+    wd.findElement(By.name("address")).click();
+    wd.findElement(By.name("address")).clear();
+    wd.findElement(By.name("address")).sendKeys(contactData.getAdress());
+    wd.findElement(By.name("home")).click();
+    wd.findElement(By.name("home")).clear();
+    wd.findElement(By.name("home")).sendKeys(contactData.getTelephoneHome());
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys(contactData.getEmailFirst());
+    wd.findElement(By.name("bday")).click();
+    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getbDate());
+    wd.findElement(By.name("bday")).click();
+    wd.findElement(By.name("bmonth")).click();
+    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getbMonth());
+    wd.findElement(By.name("bmonth")).click();
+    wd.findElement(By.name("byear")).click();
+    wd.findElement(By.name("byear")).clear();
+    wd.findElement(By.name("byear")).sendKeys(contactData.getbYear());
   }
 
   public void initContactCreation() {
 
-    groupHelper.wd.findElement(By.linkText("add new")).click();
+    wd.findElement(By.linkText("add new")).click();
   }
 
   private void login() {
-    groupHelper.wd.get("http://localhost/addressbook/addressbook/index.php");
-    groupHelper.wd.findElement(By.name("user")).clear();
-    groupHelper.wd.findElement(By.name("user")).sendKeys("admin");
-    groupHelper.wd.findElement(By.name("pass")).click();
-    groupHelper.wd.findElement(By.name("pass")).clear();
-    groupHelper.wd.findElement(By.name("pass")).sendKeys("secret");
-    groupHelper.wd.findElement(By.xpath("//input[@value='Login']")).click();
+    wd.get("http://localhost/addressbook/addressbook/index.php");
+    wd.findElement(By.name("user")).clear();
+    wd.findElement(By.name("user")).sendKeys("admin");
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).clear();
+    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   public void stop() {
-    groupHelper.wd.quit();
+    wd.quit();
   }
 
   public void goToGroupsPage() {
-    groupHelper.wd.findElement(By.linkText("groups")).click();
+    wd.findElement(By.linkText("groups")).click();
   }
 
   private boolean isElementPresent(By by) {
     try {
-      groupHelper.wd.findElement(by);
+      wd.findElement(by);
       return true;
     } catch (NoSuchElementException e) {
       return false;
@@ -90,7 +92,7 @@ public class ApplicationManager {
 
   private boolean isAlertPresent() {
     try {
-      groupHelper.wd.switchTo().alert();
+      wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
       return false;
