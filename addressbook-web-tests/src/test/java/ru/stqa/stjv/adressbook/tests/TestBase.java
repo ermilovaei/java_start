@@ -1,7 +1,8 @@
-package ru.stqa.stjv.adressbook;
+package ru.stqa.stjv.adressbook.tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import ru.stqa.stjv.adressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 

@@ -1,6 +1,7 @@
-package ru.stqa.stjv.adressbook;
+package ru.stqa.stjv.adressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.stjv.adressbook.model.contactData;
 
 public class ContactCreationTests extends TestBase{
 

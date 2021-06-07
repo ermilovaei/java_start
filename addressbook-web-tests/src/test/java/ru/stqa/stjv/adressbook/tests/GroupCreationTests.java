@@ -1,6 +1,7 @@
-package ru.stqa.stjv.adressbook;
+package ru.stqa.stjv.adressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.stjv.adressbook.model.groupData;
 
 public class GroupCreationTests extends TestBase{
 
