@@ -25,10 +25,9 @@ public class ContactDeletionTests {
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();
     wd.findElement(By.name("selected[]")).click();
-    //acceptNextAlert = true;
     wd.findElement(By.xpath("//input[@value='Delete']")).click();
     wd.switchTo().alert().accept();
-    wd.findElement(By.id("1")).click();
+
   }
 
   @AfterMethod(alwaysRun = true)
