@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.stjv.adressbook.model.contactData;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -12,18 +12,18 @@ public class ContactHelper extends HelperBase{
 
   public void submitContactCreation() {
     click(By.xpath("(//input[@name='submit'])[2]"));
-     }
+  }
 
   public void fillContactData(contactData contactData) {
-    type(By.name("firstname"),contactData.getFirstName());
-    type(By.name("lastname"),contactData.getLastName());
-    type(By.name("address"),contactData.getAdress());
-    type(By.name("home"),contactData.getTelephoneHome());
-    type(By.name("email"),contactData.getEmailFirst());
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("address"), contactData.getAdress());
+    type(By.name("home"), contactData.getTelephoneHome());
+    type(By.name("email"), contactData.getEmailFirst());
 
     dropDownChoice(By.name("bday"), contactData.getbDate());
     dropDownChoice(By.name("bmonth"), contactData.getbMonth());
-    type(By.name("byear"),contactData.getbYear());
+    type(By.name("byear"), contactData.getbYear());
 
   }
 
@@ -43,4 +43,11 @@ public class ContactHelper extends HelperBase{
     alertAccept();
   }
 
+  public void initContactModification() {
+    click(By.xpath("//td[8]/a/img"));
+  }
+
+  public void submitContactModification() {
+    click(By.xpath("(//input[@name='update'])[2]"));
+  }
 }
