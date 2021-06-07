@@ -3,20 +3,17 @@ package ru.stqa.stjv.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class NavigationHelper {
-  private WebDriver wd;
+public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(WebDriver wd) {
-
-    this.wd = wd;
+    super(wd);
   }
 
   public void returnToHomePage() {
-
-    wd.findElement(By.linkText("home page")).click();
+    click(By.linkText("home page"));
   }
 
   public void goToGroupsPage() {
-    wd.findElement(By.linkText("groups")).click();
+    click(By.linkText("groups"));
   }
 }
