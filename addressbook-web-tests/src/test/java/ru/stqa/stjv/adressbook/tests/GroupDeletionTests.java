@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.stjv.adressbook.model.groupData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +20,8 @@ public class GroupDeletionTests extends TestBase{
   public void testGroupDeletion() throws Exception {
 
     app.getNavigationHelper().goToGroupsPage();
+    if (! app.getGroupHelper().isThereAGroup())
+    { app.getGroupHelper().createGroup(new groupData("test group name", "test group header", "test group footer"));}
     app.getGroupHelper().selectGroup();
     app.getGroupHelper().initGroupDeletion();
     app.getGroupHelper().returnToGroupPage();
