@@ -1,6 +1,8 @@
 package ru.stqa.stjv.adressbook.tests;
 
 import java.util.concurrent.TimeUnit;
+
+import org.testng.Assert;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,10 +18,12 @@ public class ContactDeletionTests extends TestBase {
       app.getContactHelper().createContact(new contactData("contact", "contact last", "street, 1, 1", "234-54-333", "err@dd.tt", "28", "April", "1980"));
       app.getNavigationHelper().returnToHomePage();
     }
-    app.getContactHelper().selectContact();
+    int before = app.getContactHelper().getContactCount();
+    app.getContactHelper().selectContact(before - 1);
     app.getContactHelper().initContactDeletion();
     app.getContactHelper().contactDeletionAlertAccept();
-
+    int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after,before - 1);
   }
 
 }
