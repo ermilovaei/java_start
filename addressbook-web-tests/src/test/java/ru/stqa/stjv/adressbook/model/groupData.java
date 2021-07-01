@@ -1,5 +1,7 @@
 package ru.stqa.stjv.adressbook.model;
 
+import java.util.Objects;
+
 public class groupData {
   private final String name;
   private final String header;
@@ -13,6 +15,19 @@ public class groupData {
 
   public String getName() {
     return name;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    groupData groupData = (groupData) o;
+    return Objects.equals(name, groupData.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name);
   }
 
   public String getHeader() {

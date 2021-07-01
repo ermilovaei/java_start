@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.groupData;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class GroupDeletionTests extends TestBase{
@@ -23,12 +24,15 @@ public class GroupDeletionTests extends TestBase{
 
     if (! app.getGroupHelper().isThereAGroup())
     { app.getGroupHelper().createGroup(new groupData("test group name", "test group header", "test group footer"));}
-    int before = app.getGroupHelper().getGroupCount();
-    app.getGroupHelper().selectGroup(before - 1);
+    List<groupData> before = app.getGroupHelper().getGroupList();
+    app.getGroupHelper().selectGroup(before.size() - 1);
     app.getGroupHelper().initGroupDeletion();
     app.getGroupHelper().returnToGroupPage();
-    int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after,before - 1);
+    List<groupData> after = app.getGroupHelper().getGroupList();
+
+    Assert.assertEquals(after.size(),before.size() - 1);
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after,before);
 
   }
 
