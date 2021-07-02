@@ -12,15 +12,19 @@ import ru.stqa.stjv.adressbook.model.contactData;
 public class ContactDeletionTests extends TestBase {
   private WebDriver wd;
 
+  @BeforeMethod
+  private void ensurePreconditions() {
+    app.getNavigationHelper().goToContactsPage();
+    if (! app.getContactHelper().isThereAContact())
+    {
+      app.getContactHelper().createContact(new contactData("contact last", "contact", "street, 1, 1", "err@dd.tt", "23454333", "28", "April", "1980"));
+      app.getNavigationHelper().returnToHomePage();
+    }
+  }
+
   @Test
   public void testContactDeletion() throws Exception {
     contactData contact = new contactData("contact", "contact last", "street, 1, 1","test@email.com", "234-54-333");
-    if (! app.getContactHelper().isThereAContact())
-    {
-      app.getContactHelper().createContact(contact);
-      app.getNavigationHelper().returnToHomePage();
-    }
-
     List<contactData> beforeList = app.getContactHelper().getContactList();
     int before = app.getContactHelper().getContactCount();
     app.getContactHelper().selectContact(before - 1);

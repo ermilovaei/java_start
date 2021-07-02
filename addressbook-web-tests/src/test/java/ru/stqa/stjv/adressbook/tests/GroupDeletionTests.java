@@ -17,13 +17,17 @@ import java.util.concurrent.TimeUnit;
 public class GroupDeletionTests extends TestBase{
   private WebDriver wd;
 
+  @BeforeMethod
+  private void ensurePreconditions() {
+    app.getNavigationHelper().goToGroupsPage();
+    if (! app.getGroupHelper().isThereAGroup()){
+      app.getGroupHelper().createGroup(new groupData("group name", "test group header", "test group footer"));
+    }
+
+  }
 
   @Test
   public void testGroupDeletion() throws Exception {
-    app.getNavigationHelper().goToGroupsPage();
-
-    if (! app.getGroupHelper().isThereAGroup())
-    { app.getGroupHelper().createGroup(new groupData("test group name", "test group header", "test group footer"));}
     List<groupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup(before.size() - 1);
     app.getGroupHelper().initGroupDeletion();

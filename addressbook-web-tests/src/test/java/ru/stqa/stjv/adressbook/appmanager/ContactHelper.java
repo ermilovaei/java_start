@@ -71,6 +71,12 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  public void modifyContact(int index, contactData contact) {
+  initContactModification(index);
+  fillContactData(contact);
+  submitContactModification();
+
+  }
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
