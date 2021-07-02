@@ -1,20 +1,25 @@
 package ru.stqa.stjv.adressbook.appmanager;
 
+import io.netty.handler.codec.http.websocketx.WebSocket13FrameEncoder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.stjv.adressbook.model.contactData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactHelper extends HelperBase {
+
+  public ContactHelper(WebDriver wd) {
+    super(wd);
+  }
 
   public boolean isThereAContact()
   {
     return
             isElementPresent(By.name("selected[]"));
 
-  }
-
-  public ContactHelper(WebDriver wd) {
-    super(wd);
   }
 
   public void submitContactCreation() {
@@ -68,5 +73,23 @@ public class ContactHelper extends HelperBase {
 
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<contactData> getContactList() {
+    List<contactData> contacts = new ArrayList<contactData>();
+    List<WebElement> rows = wd.findElements(By.tagName("tr"));
+    rows.remove(0);
+
+    for (WebElement row:rows){
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id = Integer.parseInt(cells.get(0).findElement(By.name("selected[]")).getAttribute("id"));
+      String  lastName = cells.get(1).getText();
+      String firstName = cells.get(2).getText();
+      String adress = cells.get(3).getText();
+      String emailFirst = cells.get(4).getText();
+      String telephoneHome= cells.get(5).getText();
+      contacts.add(new contactData(id,lastName, firstName, adress, emailFirst, telephoneHome ));
+    }
+    return contacts;
   }
 }
