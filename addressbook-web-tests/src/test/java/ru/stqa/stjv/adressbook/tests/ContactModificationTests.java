@@ -12,34 +12,34 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   private void ensurePreconditions() {
-    app.getNavigationHelper().goToContactsPage();
-    if (! app.getContactHelper().isThereAContact())
+    app.goTo().ContactsPage();
+    if (app.contact().list().size() == 0)
     {
-      app.getContactHelper().createContact(new contactData("contact last", "contact", "street, 1, 1", "err@dd.tt", "23454333", "28", "April", "1980"));
-      app.getNavigationHelper().returnToHomePage();
+      app.contact().create(new contactData("contact last", "contact", "street, 1, 1", "err@dd.tt", "23454333", "28", "April", "1980"));
+      app.goTo().HomePageBack();
     }
   }
 
   @Test
   public void testContactModification()  {
-    List<contactData> beforeList = app.getContactHelper().getContactList();
-    int index = beforeList.size() - 1;
-    contactData contact = new contactData(beforeList.get(index).getId(), "new last" , "c name",  "new street, 1, 1", "err@dd.tt", "23454333");
+    List<contactData> before = app.contact().list();
+    int index = before.size() - 1;
+    contactData contact = new contactData(before.get(index).getId(), "new last" , "c name",  "new street, 1, 1", "err@dd.tt", "23454333");
 
-    app.getContactHelper().modifyContact(index, contact);
-    app.getNavigationHelper().returnToHomePage();
+    app.contact().modify(index, contact);
+    app.goTo().HomePageBack();
 
-    List<contactData> afterList = app.getContactHelper().getContactList();
-    Assert.assertEquals(beforeList.size(), afterList.size());
+    List<contactData> after = app.contact().list();
+    Assert.assertEquals(before.size(), after.size());
 
-    beforeList.remove(index);
-    beforeList.add(contact);
+    before.remove(index);
+    before.add(contact);
 
     Comparator<? super contactData> byID = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    beforeList.sort(byID);
-    afterList.sort(byID);
+    before.sort(byID);
+    after.sort(byID);
 
-    Assert.assertEquals(beforeList, afterList);
+    Assert.assertEquals(before, after);
   }
 
 

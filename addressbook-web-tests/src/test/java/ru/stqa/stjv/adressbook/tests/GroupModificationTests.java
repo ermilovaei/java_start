@@ -6,16 +6,15 @@ import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.groupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
   private void ensurePreconditions() {
-    app.getNavigationHelper().goToGroupsPage();
-    if (! app.getGroupHelper().isThereAGroup()){
-      app.getGroupHelper().createGroup(new groupData("group name", "test group header", "test group footer"));
+    app.goTo().GroupsPage();
+    if (app.group().list().size() == 0){
+      app.group().create(new groupData("group name", "test group header", "test group footer"));
     }
 
   }
@@ -23,13 +22,13 @@ public class GroupModificationTests extends TestBase {
   @Test
   public void testGroupModification(){
 
-  List<groupData> before = app.getGroupHelper().getGroupList();
+  List<groupData> before = app.group().list();
   int index = before.size() - 1;
   groupData group = new groupData( before.get(index).getId(),"new group", "test group header", "new group footer");
 
-  app.getGroupHelper().modifyGroup(index, group);
+  app.group().modify(index, group);
 
-  List<groupData> after = app.getGroupHelper().getGroupList();
+  List<groupData> after = app.group().list();
 
   Assert.assertEquals(after.size(),before.size());
     before.remove(index);

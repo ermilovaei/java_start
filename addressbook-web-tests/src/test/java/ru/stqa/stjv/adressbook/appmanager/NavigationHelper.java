@@ -9,16 +9,16 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnToHomePage() {
+  public void HomePageBack() {
 
     click(By.linkText("home page"));
   }
 
-  public void goToGroupsPage() {
+  public void GroupsPage() {
 
     click(By.linkText("groups"));
   }
-  public void goToContactsPage() {
+  public void ContactsPage() {
 
     click(By.linkText("home"));
   }
