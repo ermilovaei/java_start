@@ -15,16 +15,14 @@ public class ContactDeletionTests extends TestBase {
     app.goTo().ContactsPage();
     if (app.contact().list().size() == 0)
     {
-      app.contact().create(new
-              contactData().withLastName("contact last").withFirstName("contact").
-              withAdress("street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
-              withBDate("28").withBMonth("April").withBYear("1980"));
+      app.contact().create(new contactData("contact last", "contact", "street, 1, 1", "err@dd.tt", "23454333", "28", "April", "1980"));
       app.goTo().HomePageBack();
     }
   }
 
   @Test
   public void testContactDeletion() throws Exception {
+    contactData contact = new contactData("contact", "contact last", "street, 1, 1","test@email.com", "234-54-333");
     List<contactData> before = app.contact().list();
     int index = before.size() - 1;
 
