@@ -1,6 +1,7 @@
 package ru.stqa.stjv.adressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.groupData;
 
@@ -9,11 +10,16 @@ import java.util.List;
 
 public class GroupCreationTests extends TestBase{
 
+  @BeforeMethod
+  private void init() {
+    app.goTo().GroupsPage();
+  }
+
   @Test
   public void testGroupCreation() throws Exception {
-    app.goTo().GroupsPage();
+
     List<groupData> before = app.group().list();
-    groupData group = new groupData("test group name", "test group header", "test group footer");
+    groupData group = new groupData().withName("group name").withHeader("test group header").withFooter("test group footer");
     app.group().create(group);
 
     List<groupData> after = app.group().list();

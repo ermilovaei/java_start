@@ -100,7 +100,8 @@ public class ContactHelper extends HelperBase {
       String adress = cells.get(3).getText();
       String emailFirst = cells.get(4).getText();
       String telephoneHome= cells.get(5).getText();
-      contacts.add(new contactData(id,lastName, firstName, adress, emailFirst, telephoneHome ));
+      contacts.add(new contactData().withId(id).withLastName(lastName).withFirstName(firstName).
+              withAdress(adress).withEmailFirst(emailFirst).withTelephoneHome(telephoneHome ));
     }
     return contacts;
   }
