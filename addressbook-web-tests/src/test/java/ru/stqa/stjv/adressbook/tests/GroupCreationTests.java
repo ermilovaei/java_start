@@ -5,8 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.groupData;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 public class GroupCreationTests extends TestBase{

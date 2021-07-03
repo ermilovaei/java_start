@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.groupData;
 
-import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase{
   private WebDriver wd;
@@ -14,7 +14,7 @@ public class GroupDeletionTests extends TestBase{
   @BeforeMethod
   private void ensurePreconditions() {
     app.goTo().GroupsPage();
-    if (app.group().list().size() == 0){
+    if (app.group().all().size() == 0){
       app.group().create(new groupData().withName("group name").withHeader("test group header").withFooter("test group footer"));
     }
 
@@ -22,15 +22,15 @@ public class GroupDeletionTests extends TestBase{
 
   @Test
   public void testGroupDeletion() throws Exception {
-    List<groupData> before = app.group().list();
+    Set<groupData> before = app.group().all();
     int index = before.size() - 1;
+    groupData deletedGroup = before.iterator().next();
+    app.group().delete(deletedGroup);
 
-    app.group().delete(index);
-
-    List<groupData> after = app.group().list();
+    Set<groupData> after = app.group().all();
 
     Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(index);
+    before.remove(deletedGroup);
     Assert.assertEquals(after,before);
 
   }
