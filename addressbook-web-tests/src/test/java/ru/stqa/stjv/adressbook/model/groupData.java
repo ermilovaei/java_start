@@ -28,12 +28,12 @@ public class groupData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     groupData groupData = (groupData) o;
-    return Objects.equals(name, groupData.name);
+    return id == groupData.id && Objects.equals(name, groupData.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(id, name);
   }
 
   public groupData(String name, String header, String footer) {

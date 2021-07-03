@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.stjv.adressbook.model.groupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -91,4 +93,17 @@ public class GroupHelper extends HelperBase {
     }
     return groups;
   }
+
+  public Set<groupData> all() {
+    Set<groupData> groups = new HashSet<groupData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("Span.group"));
+    for (WebElement element: elements) {
+      String name = element.getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      groupData group = new groupData(id, name, null, null);
+      groups.add(group);
+    }
+    return groups;
+  }
+
 }

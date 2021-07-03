@@ -18,7 +18,7 @@ public class ContactCreationTests extends TestBase{
     contactData contact = new contactData( "contact last7", "contact7","street, 7, 1","err7@dd.tt", "23454333",  "28", "April", "1980");
 
     app.contact().create(contact);
-    app.goTo().HomePageBack();
+    app.goTo().homePageBack();
 
     int after = app.contact().getContactCount();
     List<contactData> afterList = app.contact().list();
