@@ -15,16 +15,11 @@ public class ContactDeletionTests extends TestBase {
     app.goTo().ContactsPage();
     if (app.contact().list().size() == 0)
     {
-<<<<<<< HEAD
-      app.contact().create(new contactData("contact last", "contact", "street, 1, 1", "err@dd.tt", "23454333", "28", "April", "1980"));
-      app.goTo().homePageBack();
-=======
-      app.contact().create(new
+     app.contact().create(new
               contactData().withLastName("contact last").withFirstName("contact").
               withAdress("street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
               withBDate("28").withBMonth("April").withBYear("1980"));
-      app.goTo().HomePageBack();
->>>>>>> parent of 9fa1c5d (Revert "реализованы шаблон-билдеры в тестах для групп и контактов")
+      app.goTo().homePageBack();
     }
   }
 
