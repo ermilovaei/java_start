@@ -72,12 +72,12 @@ public class contactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     contactData that = (contactData) o;
-    return Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(adress, that.adress) && Objects.equals(emailFirst, that.emailFirst) && Objects.equals(telephoneHome, that.telephoneHome);
+    return Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lastName, firstName, adress, emailFirst, telephoneHome);
+    return Objects.hash(lastName, firstName);
   }
 
   public int getId() {
