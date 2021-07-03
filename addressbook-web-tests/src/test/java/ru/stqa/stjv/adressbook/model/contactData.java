@@ -3,53 +3,60 @@ package ru.stqa.stjv.adressbook.model;
 import java.util.Objects;
 
 public class contactData {
-  private final int id;
-  private final String lastName;
-  private final String firstName;
-  private final String adress;
-  private final String emailFirst;
-  private final String telephoneHome;
-  private final String bDate;
-  private final String bMonth;
-  private final String bYear;
+  private  int id = Integer.MAX_VALUE;
+  private  String lastName;
+  private  String firstName;
+  private  String adress;
+  private  String emailFirst;
+  private  String telephoneHome;
+  private  String bDate  = "31";
+  private  String bMonth = "January";
+  private  String bYear = "1990";
 
 
-
-  public contactData(String lastName, String firstName, String adress, String emailFirst, String telephoneHome, String bDate, String bMonth, String bYear) {
-    this.id = Integer.MAX_VALUE;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.adress = adress;
-    this.telephoneHome = telephoneHome;
-    this.emailFirst = emailFirst;
-    this.bDate = bDate;
-    this.bMonth = bMonth;
-    this.bYear = bYear;
-  }
-
-  public contactData(String lastName, String firstName,  String adress, String emailFirst, String telephoneHome) {
-    this.id = Integer.MAX_VALUE;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.adress = adress;
-    this.telephoneHome = telephoneHome;
-    this.emailFirst = emailFirst;
-    this.bDate = "31";
-    this.bMonth = "January";
-    this.bYear = "1990";
-
-  }
-
-  public contactData(int id, String lastName, String firstName, String adress, String emailFirst, String telephoneHome) {
+  public contactData withId(int id) {
     this.id = id;
-    this.firstName = firstName;
+    return this;
+  }
+
+  public  contactData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
+  }
+
+  public contactData withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public contactData withAdress(String adress) {
     this.adress = adress;
-    this.telephoneHome = telephoneHome;
+    return this;
+  }
+
+  public contactData withEmailFirst(String emailFirst) {
     this.emailFirst = emailFirst;
-    this.bDate = "31";
-    this.bMonth = "January";
-    this.bYear = "1990";
+    return this;
+  }
+
+  public contactData withTelephoneHome(String telephoneHome) {
+    this.telephoneHome = telephoneHome;
+    return this;
+  }
+
+  public contactData withBDate(String bDate) {
+    this.bDate = bDate;
+    return this;
+  }
+
+  public contactData withBMonth(String bMonth) {
+    this.bMonth = bMonth;
+    return this;
+  }
+
+  public contactData withBYear(String bYear) {
+    this.bYear = bYear;
+    return this;
   }
 
   @Override
@@ -79,6 +86,10 @@ public class contactData {
   public int hashCode() {
     return Objects.hash(lastName, firstName);
   }
+
+
+
+
 
   public int getId() {
     return id;

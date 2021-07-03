@@ -15,8 +15,16 @@ public class ContactModificationTests extends TestBase {
     app.goTo().ContactsPage();
     if (app.contact().list().size() == 0)
     {
+<<<<<<< HEAD
       app.contact().create(new contactData("contact last", "contact", "street, 1, 1", "err@dd.tt", "23454333", "28", "April", "1980"));
       app.goTo().homePageBack();
+=======
+      app.contact().create(new
+              contactData().withLastName("contact last").withFirstName("contact").
+              withAdress("street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
+              withBDate("28").withBMonth("April").withBYear("1980"));
+      app.goTo().HomePageBack();
+>>>>>>> parent of 9fa1c5d (Revert "реализованы шаблон-билдеры в тестах для групп и контактов")
     }
   }
 
@@ -24,10 +32,17 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification()  {
     List<contactData> before = app.contact().list();
     int index = before.size() - 1;
-    contactData contact = new contactData(before.get(index).getId(), "new last" , "c name",  "new street, 1, 1", "err@dd.tt", "23454333");
+    contactData contact = new contactData().withId(before.get(index).getId()).withLastName("new last").withFirstName("c name").
+                              withAdress("new street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
+                              withBDate("11").withBMonth("April").withBYear("1999");
 
+<<<<<<< HEAD
     app.contact().modify(index, contact);
     app.goTo().homePageBack();
+=======
+      app.contact().modify(index, contact);
+    app.goTo().HomePageBack();
+>>>>>>> parent of 9fa1c5d (Revert "реализованы шаблон-билдеры в тестах для групп и контактов")
 
     List<contactData> after = app.contact().list();
     Assert.assertEquals(before.size(), after.size());
