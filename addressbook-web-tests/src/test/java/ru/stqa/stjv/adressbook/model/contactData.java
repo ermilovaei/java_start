@@ -2,7 +2,7 @@ package ru.stqa.stjv.adressbook.model;
 
 import java.util.Objects;
 
-public class contactData {
+public class ContactData {
   private  int id = Integer.MAX_VALUE;
   private  String lastName;
   private  String firstName;
@@ -14,47 +14,47 @@ public class contactData {
   private  String bYear = "1990";
 
 
-  public contactData withId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
     return this;
   }
 
-  public  contactData withLastName(String lastName) {
+  public ContactData withLastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
 
-  public contactData withFirstName(String firstName) {
+  public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
 
-  public contactData withAdress(String adress) {
+  public ContactData withAdress(String adress) {
     this.adress = adress;
     return this;
   }
 
-  public contactData withEmailFirst(String emailFirst) {
+  public ContactData withEmailFirst(String emailFirst) {
     this.emailFirst = emailFirst;
     return this;
   }
 
-  public contactData withTelephoneHome(String telephoneHome) {
+  public ContactData withTelephoneHome(String telephoneHome) {
     this.telephoneHome = telephoneHome;
     return this;
   }
 
-  public contactData withBDate(String bDate) {
+  public ContactData withBDate(String bDate) {
     this.bDate = bDate;
     return this;
   }
 
-  public contactData withBMonth(String bMonth) {
+  public ContactData withBMonth(String bMonth) {
     this.bMonth = bMonth;
     return this;
   }
 
-  public contactData withBYear(String bYear) {
+  public ContactData withBYear(String bYear) {
     this.bYear = bYear;
     return this;
   }
@@ -78,7 +78,7 @@ public class contactData {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    contactData that = (contactData) o;
+    ContactData that = (ContactData) o;
     return id == that.id && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName);
   }
 

@@ -1,11 +1,12 @@
 package ru.stqa.stjv.adressbook.tests;
 
-import java.util.Set;
-
-import org.testng.Assert;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
-import ru.stqa.stjv.adressbook.model.contactData;
+import ru.stqa.stjv.adressbook.model.ContactData;
+import ru.stqa.stjv.adressbook.model.Contacts;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class ContactDeletionTests extends TestBase {
@@ -17,7 +18,7 @@ public class ContactDeletionTests extends TestBase {
     if (app.contact().all().size() == 0)
     {
      app.contact().create(new
-              contactData().withLastName("contact last").withFirstName("contact").
+             ContactData().withLastName("contact last").withFirstName("contact").
               withAdress("street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
               withBDate("28").withBMonth("April").withBYear("1980"));
       app.goTo().homePageBack();
@@ -26,16 +27,15 @@ public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion() throws Exception {
-    Set<contactData> before = app.contact().all();
+    Contacts before = app.contact().all();
 
-    contactData deletedContact = before.iterator().next();
+    ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
 
-    Set<contactData> after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size() - 1);
+    Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size() - 1) );
 
-    before.remove(deletedContact);
-    Assert.assertEquals(after,before);
+    assertThat(after, equalTo(before.withOut(deletedContact)));
   }
 
 

@@ -4,11 +4,11 @@ package ru.stqa.stjv.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.stqa.stjv.adressbook.model.contactData;
+import ru.stqa.stjv.adressbook.model.ContactData;
+import ru.stqa.stjv.adressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -27,7 +27,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void fillContactData(contactData contactData) {
+  public void fillContactData(ContactData contactData) {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("address"), contactData.getAdress());
@@ -67,20 +67,20 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='update'])[2]"));
   }
 
-  public void create(contactData contactData) {
+  public void create(ContactData contactData) {
    initContactCreation();
    fillContactData(contactData);
    submitContactCreation();
 
   }
 
-  public void modify(contactData contact) {
+  public void modify(ContactData contact) {
     initContactModificationById(contact.getId());
   fillContactData(contact);
   submitContactModification();
   }
 
-  public void delete(contactData contact) {
+  public void delete(ContactData contact) {
     selectContactById(contact.getId());
     initContactDeletion();
     contactDeletionAlertAccept();
@@ -91,8 +91,8 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public Set<contactData> all() {
-    Set<contactData> contacts = new HashSet<contactData>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> rows = wd.findElements(By.tagName("tr"));
     rows.remove(0);
 
@@ -104,7 +104,7 @@ public class ContactHelper extends HelperBase {
       String adress = cells.get(3).getText();
       String emailFirst = cells.get(4).getText();
       String telephoneHome= cells.get(5).getText();
-      contacts.add(new contactData().withId(id).withLastName(lastName).withFirstName(firstName).
+      contacts.add(new ContactData().withId(id).withLastName(lastName).withFirstName(firstName).
               withAdress(adress).withEmailFirst(emailFirst).withTelephoneHome(telephoneHome ));
     }
     return contacts;

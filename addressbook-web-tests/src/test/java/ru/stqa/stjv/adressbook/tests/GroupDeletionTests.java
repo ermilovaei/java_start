@@ -1,12 +1,16 @@
 package ru.stqa.stjv.adressbook.tests;
 
+
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.stjv.adressbook.model.groupData;
+import ru.stqa.stjv.adressbook.model.GroupData;
+import ru.stqa.stjv.adressbook.model.Groups;
 
-import java.util.Set;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
 
 public class GroupDeletionTests extends TestBase{
   private WebDriver wd;
@@ -15,23 +19,22 @@ public class GroupDeletionTests extends TestBase{
   private void ensurePreconditions() {
     app.goTo().GroupsPage();
     if (app.group().all().size() == 0){
-      app.group().create(new groupData().withName("group name").withHeader("test group header").withFooter("test group footer"));
+      app.group().create(new GroupData().withName("group name").withHeader("test group header").withFooter("test group footer"));
     }
 
   }
 
   @Test
   public void testGroupDeletion() throws Exception {
-    Set<groupData> before = app.group().all();
+    Groups before = app.group().all();
     int index = before.size() - 1;
-    groupData deletedGroup = before.iterator().next();
+    GroupData deletedGroup = before.iterator().next();
     app.group().delete(deletedGroup);
 
-    Set<groupData> after = app.group().all();
+    Groups after = app.group().all();
+    assertThat(after.size(), equalTo(before.size() - 1));
 
-    Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(deletedGroup);
-    Assert.assertEquals(after,before);
+    assertThat(after, equalTo(before.withOut(deletedGroup )));
 
   }
 
