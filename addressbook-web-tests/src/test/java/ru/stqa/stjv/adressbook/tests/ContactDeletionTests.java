@@ -1,11 +1,12 @@
 package ru.stqa.stjv.adressbook.tests;
 
-import java.util.List;
+import java.util.Set;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import ru.stqa.stjv.adressbook.model.contactData;
+
 
 public class ContactDeletionTests extends TestBase {
   private WebDriver wd;
@@ -13,7 +14,7 @@ public class ContactDeletionTests extends TestBase {
   @BeforeMethod
   private void ensurePreconditions() {
     app.goTo().ContactsPage();
-    if (app.contact().list().size() == 0)
+    if (app.contact().all().size() == 0)
     {
      app.contact().create(new
               contactData().withLastName("contact last").withFirstName("contact").
@@ -25,16 +26,15 @@ public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion() throws Exception {
-    List<contactData> before = app.contact().list();
-    int index = before.size() - 1;
+    Set<contactData> before = app.contact().all();
 
+    contactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
 
-    app.contact().delete(index);
-
-
-    List<contactData> after = app.contact().list();
+    Set<contactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(index);
+
+    before.remove(deletedContact);
     Assert.assertEquals(after,before);
   }
 

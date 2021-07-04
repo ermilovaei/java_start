@@ -1,13 +1,14 @@
 package ru.stqa.stjv.adressbook.appmanager;
 
-import io.netty.handler.codec.http.websocketx.WebSocket13FrameEncoder;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.stjv.adressbook.model.contactData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -43,8 +44,10 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']") ).click();
+
   }
 
   public void initContactDeletion() {
@@ -56,8 +59,8 @@ public class ContactHelper extends HelperBase {
     alertAccept();
   }
 
-  public void initContactModification(int index) {
-    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+  public void initContactModificationById(int id) {
+    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']") ).click();
   }
 
   public void submitContactModification() {
@@ -71,14 +74,14 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void modify(int index, contactData contact) {
-  initContactModification(index);
+  public void modify(contactData contact) {
+    initContactModificationById(contact.getId());
   fillContactData(contact);
   submitContactModification();
   }
 
-  public void delete(int index) {
-    selectContact(index);
+  public void delete(contactData contact) {
+    selectContactById(contact.getId());
     initContactDeletion();
     contactDeletionAlertAccept();
   }
@@ -87,8 +90,9 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<contactData> list() {
-    List<contactData> contacts = new ArrayList<contactData>();
+
+  public Set<contactData> all() {
+    Set<contactData> contacts = new HashSet<contactData>();
     List<WebElement> rows = wd.findElements(By.tagName("tr"));
     rows.remove(0);
 
@@ -105,4 +109,5 @@ public class ContactHelper extends HelperBase {
     }
     return contacts;
   }
+
 }

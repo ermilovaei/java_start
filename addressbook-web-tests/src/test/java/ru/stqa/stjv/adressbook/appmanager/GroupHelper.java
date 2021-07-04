@@ -70,7 +70,12 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
+  public void delete(groupData group) {
+    selectGroupById(group.getId());
+    initGroupDeletion();
+    returnToGroupPage();
 
+  }
 
   public boolean isThereAGroup() {
     return
@@ -91,12 +96,7 @@ public class GroupHelper extends HelperBase {
     return groups;
   }
 
-  public void delete(groupData group) {
-    selectGroupById(group.getId());
-    initGroupDeletion();
-    returnToGroupPage();
 
-  }
 
 
 }

@@ -5,8 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.contactData;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase{
 
@@ -17,9 +16,7 @@ public class ContactCreationTests extends TestBase{
 
   @Test
   public void testContactCreation() throws Exception {
-
-    int before = app.contact().getContactCount();
-    List<contactData> beforeList = app.contact().list();
+    Set<contactData> before = app.contact().all();
 
     contactData contact = new  contactData().withLastName("last name").withFirstName("First name").
             withAdress("street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
@@ -28,18 +25,14 @@ public class ContactCreationTests extends TestBase{
     app.contact().create(contact);
     app.goTo().homePageBack();
 
-    int after = app.contact().getContactCount();
-    List<contactData> afterList = app.contact().list();
 
-    Assert.assertEquals(after,before + 1);
+    Set<contactData> after = app.contact().all();
+    Assert.assertEquals(after.size(),before.size() + 1);
 
-    beforeList.add(contact);
+    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+    before.add(contact);
 
-    Comparator<? super contactData> byID = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    beforeList.sort(byID);
-    afterList.sort(byID);
-
-    Assert.assertEquals(beforeList,afterList);
+    Assert.assertEquals(before, after);
 
   }
 

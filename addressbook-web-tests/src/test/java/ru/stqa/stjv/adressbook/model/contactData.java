@@ -79,17 +79,13 @@ public class contactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     contactData that = (contactData) o;
-    return Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName);
+    return id == that.id && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lastName, firstName);
+    return Objects.hash(id, lastName, firstName);
   }
-
-
-
-
 
   public int getId() {
     return id;
