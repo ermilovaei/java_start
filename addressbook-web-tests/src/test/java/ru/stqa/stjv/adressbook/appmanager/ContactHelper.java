@@ -109,12 +109,32 @@ public class ContactHelper extends HelperBase {
       String  lastName = cells.get(1).getText();
       String firstName = cells.get(2).getText();
       String adress = cells.get(3).getText();
-      String emailFirst = cells.get(4).getText();
-      String telephoneHome= cells.get(5).getText();
-      contactCash.add(new ContactData().withId(id).withLastName(lastName).withFirstName(firstName).
-              withAdress(adress).withEmailFirst(emailFirst).withTelephoneHome(telephoneHome ));
+      String allEmails = cells.get(4).getText();
+      String allTelephones= cells.get(5).getText();
+      contactCash.add(new ContactData().withId(id).withLastName(lastName).withFirstName(firstName)
+              .withAdress(adress)
+              .withAllEmails(allEmails)
+              .withAllTelephones(allTelephones));
     }
     return new Contacts(contactCash);
   }
 
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+    String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getAttribute("textContent");
+    String emailFirst = wd.findElement(By.name("email")).getAttribute("value");
+    String emailSecond = wd.findElement(By.name("email2")).getAttribute("value");
+    String emailThird = wd.findElement(By.name("email3")).getAttribute("value");
+    String telephoneHome = wd.findElement(By.name("home")).getAttribute("value");
+    String telephoneMobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String telephoneWork = wd.findElement(By.name("work")).getAttribute("value");
+    String telephoneSecondaryHome = wd.findElement(By.name("phone2")).getAttribute("value");
+    return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName).withAdress(address)
+            .withEmailFirst(emailFirst).withEmailSecond(emailSecond).whithEmailThird(emailThird)
+            .withTelephoneHome(telephoneHome).withTelephoneMobile(telephoneMobile)
+            .withTelephoneWork(telephoneWork).withTelephoneSecondaryHome(telephoneSecondaryHome);
+
+  }
 }

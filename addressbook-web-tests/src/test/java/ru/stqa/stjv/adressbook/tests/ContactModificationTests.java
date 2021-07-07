@@ -34,7 +34,7 @@ public class ContactModificationTests extends TestBase {
     ContactData moifiedContact = before.iterator().next();
 
     ContactData contact = new ContactData().withId(moifiedContact.getId()).withLastName("new last").withFirstName("c name").
-                              withAdress("new street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
+                              withAdress("new street, 1, 1").withEmailSecond("e.rtt@d.yd.tt").withTelephoneWork("555 55 53").
                               withBDate("11").withBMonth("April").withBYear("1999");
 
 

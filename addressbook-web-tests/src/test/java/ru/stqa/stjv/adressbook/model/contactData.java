@@ -8,11 +8,83 @@ public class ContactData {
   private  String firstName;
   private  String adress;
   private  String emailFirst;
+  private  String emailSecond;
+  private  String emailThird;
+
+  private  String allEmails;
+  private  String allTelephones;
+
   private  String telephoneHome;
+  private  String telephoneMobile;
+  private  String telephoneWork;
+  private  String telephoneSecondaryHome;
+
   private  String bDate  = "31";
   private  String bMonth = "January";
   private  String bYear = "1990";
 
+  public String getAllTelephones() {
+    return allTelephones;
+  }
+
+  public ContactData withAllTelephones(String allTelephones) {
+    this.allTelephones = allTelephones;
+    return this;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public String getEmailSecond() {
+    return emailSecond;
+  }
+
+  public ContactData withEmailSecond(String emailSecond) {
+    this.emailSecond = emailSecond;
+    return this;
+  }
+
+  public String getEmailThird() {
+    return emailThird;
+  }
+
+  public ContactData whithEmailThird(String emailThird) {
+    this.emailThird = emailThird;
+    return this;
+  }
+
+  public String getTelephoneMobile() {
+    return telephoneMobile;
+  }
+
+  public ContactData withTelephoneMobile(String telephoneMobile) {
+    this.telephoneMobile = telephoneMobile;
+    return this;
+  }
+
+  public String getTelephoneWork() {
+    return telephoneWork;
+  }
+
+  public ContactData withTelephoneWork(String telephoneWork) {
+    this.telephoneWork = telephoneWork;
+    return this;
+  }
+
+  public String getTelephoneSecondaryHome() {
+    return telephoneSecondaryHome;
+  }
+
+  public ContactData withTelephoneSecondaryHome(String telephoneSecondaryHome) {
+    this.telephoneSecondaryHome = telephoneSecondaryHome;
+    return this;
+  }
 
   public ContactData withId(int id) {
     this.id = id;
@@ -121,5 +193,6 @@ public class ContactData {
   public String getbYear() {
     return bYear;
   }
+
 
 }
