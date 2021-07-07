@@ -40,10 +40,9 @@ public class ContactModificationTests extends TestBase {
 
     app.contact().modify(contact);
     app.goTo().homePageBack();
+    assertThat(app.contact().count(), equalTo(before.size()));
 
     Contacts after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size()));
-
     MatcherAssert.assertThat(after,
             CoreMatchers.equalTo(before.withOut(moifiedContact).withAdded(contact)));
   }
