@@ -1,5 +1,6 @@
 package ru.stqa.stjv.adressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -22,6 +23,17 @@ public class ContactData {
   private  String bDate  = "31";
   private  String bMonth = "January";
   private  String bYear = "1990";
+
+  private File photo;
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public String getAllTelephones() {
     return allTelephones;
