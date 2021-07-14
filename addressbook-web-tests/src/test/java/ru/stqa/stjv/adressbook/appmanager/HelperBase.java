@@ -29,10 +29,11 @@ public class HelperBase {
       }
     }
   }
-  protected void attach(By locator, File file) {
+  protected void attach(By locator, String fileSrc) {
 
-    if (file != null) {
-        wd.findElement(locator).sendKeys(file.getAbsolutePath());
+    if (fileSrc != null) {
+      File photo = new File(fileSrc);
+        wd.findElement(locator).sendKeys(photo.getAbsolutePath());
     }
   }
 

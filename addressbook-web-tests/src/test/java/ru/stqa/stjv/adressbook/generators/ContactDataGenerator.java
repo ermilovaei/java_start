@@ -63,6 +63,7 @@ public class ContactDataGenerator {
   private  List<ContactData> generateContacts(int count) {
 
     List<ContactData> contacts = new ArrayList<ContactData>();
+
     for (int i = 1; i <= count; i++){
       contacts.add(new ContactData().withFirstName(String.format("Contact Name %s", i))
               .withLastName(String.format("Last Name%s", i))
@@ -73,26 +74,27 @@ public class ContactDataGenerator {
               .whithEmailThird(String.format("em_ai-l@Thi%s.rd", i))
               .withTelephoneHome("+7(234)54 44")
               .withTelephoneMobile(String.format("2323-232 2323.00%s",i))
-              .withTelephoneWork("333.444#55").withTelephoneSecondaryHome("222 222 222"));
+              .withTelephoneWork("333.444#55").withTelephoneSecondaryHome("222 222 222")
+              .withPhoto("src/test/resources/pic.png"));
     }
     return contacts;
   }
 
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-    Writer writer = new FileWriter(file);
-    for (ContactData contact:contacts) {
-      writer.write(String.format("%s;%s;%s\n", contact.getFirstName(),contact.getLastName(),
-              contact.getAdress()));
+    try (Writer writer = new FileWriter(file)) {
+      for (ContactData contact : contacts) {
+        writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(),
+                contact.getAdress()));
+      }
     }
-    writer.close();
   }
 
   private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
 }

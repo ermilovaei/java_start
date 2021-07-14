@@ -2,7 +2,6 @@ package ru.stqa.stjv.adressbook.model;
 
 import com.google.gson.annotations.Expose;
 
-import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -38,14 +37,14 @@ public class ContactData {
   private  String bMonth = "January";
   @Expose
   private  String bYear = "1990";
+  @Expose
+  private String photo;
 
-  private File photo;
-
-  public File getPhoto() {
+  public String getPhoto() {
     return photo;
   }
 
-  public ContactData withPhoto(File photo) {
+  public ContactData withPhoto(String photo) {
     this.photo = photo;
     return this;
   }
@@ -160,16 +159,24 @@ public class ContactData {
 
   @Override
   public String toString() {
-    return "contactData{" +
-            "id='" + id + '\'' +
-            ", firstName='" + firstName + '\'' +
+    return "ContactData{" +
+            "id=" + id +
             ", lastName='" + lastName + '\'' +
+            ", firstName='" + firstName + '\'' +
             ", adress='" + adress + '\'' +
-            ", telephoneHome='" + telephoneHome + '\'' +
             ", emailFirst='" + emailFirst + '\'' +
+            ", emailSecond='" + emailSecond + '\'' +
+            ", emailThird='" + emailThird + '\'' +
+            ", allEmails='" + allEmails + '\'' +
+            ", allTelephones='" + allTelephones + '\'' +
+            ", telephoneHome='" + telephoneHome + '\'' +
+            ", telephoneMobile='" + telephoneMobile + '\'' +
+            ", telephoneWork='" + telephoneWork + '\'' +
+            ", telephoneSecondaryHome='" + telephoneSecondaryHome + '\'' +
             ", bDate='" + bDate + '\'' +
             ", bMonth='" + bMonth + '\'' +
             ", bYear='" + bYear + '\'' +
+            ", photo=" + photo +
             '}';
   }
 
