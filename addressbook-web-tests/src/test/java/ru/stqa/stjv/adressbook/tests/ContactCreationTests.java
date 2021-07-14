@@ -31,7 +31,6 @@ public class ContactCreationTests extends TestBase{
 
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
-    List<Object[]> list = new ArrayList<Object[]>();
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
       String json = "";
       String line = reader.readLine();
