@@ -32,7 +32,14 @@ public class ContactHelper extends HelperBase {
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("address"), contactData.getAdress());
     type(By.name("home"), contactData.getTelephoneHome());
+    type(By.name("mobile"), contactData.getTelephoneMobile());
+    type(By.name("work"), contactData.getTelephoneWork());
+    type(By.name("phone2"), contactData.getTelephoneSecondaryHome());
+
     type(By.name("email"), contactData.getEmailFirst());
+    type(By.name("email2"), contactData.getEmailSecond());
+    type(By.name("email3"), contactData.getEmailThird());
+
     attach(By.name("photo"),contactData.getPhoto());
 
     dropDownChoice(By.name("bday"), contactData.getbDate());

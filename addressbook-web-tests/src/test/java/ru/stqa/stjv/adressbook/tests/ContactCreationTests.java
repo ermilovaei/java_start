@@ -1,12 +1,23 @@
 package ru.stqa.stjv.adressbook.tests;
 
+import com.google.gson.Gson;
+import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
+import ru.stqa.stjv.adressbook.model.GroupData;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,17 +29,26 @@ public class ContactCreationTests extends TestBase{
     app.goTo().ContactsPage();
   }
 
-  @Test
-  public void testContactCreation() throws Exception {
+  @DataProvider
+  public Iterator<Object[]> validContactsFromJson() throws IOException {
+    List<Object[]> list = new ArrayList<Object[]>();
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
+    String json = "";
+    String line = reader.readLine();
+    while (line != null)
+    {
+      json += line;
+      line = reader.readLine();
+    }
+    Gson gson = new Gson();
+    List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
+    return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
+  }
+
+  @Test (dataProvider = "validContactsFromJson")
+  public void testContactCreation(ContactData contact) throws Exception {
     Contacts before = app.contact().all();
     File photo = new File("src/test/resources/pic.png");
-    ContactData contact = new ContactData().withLastName("last name").withFirstName("First name")
-            .withPhoto(photo)
-            .withAdress("street, 1, 1")
-            .withBDate("28").withBMonth("April").withBYear("1980")
-            .withEmailFirst("err@dd.tt").withEmailSecond("email.Second@rrr.rr").whithEmailThird("em_ai-l@Thi.rd")
-            .withTelephoneHome("+7(234)54333").withTelephoneMobile("2323-232 2323.00")
-            .withTelephoneWork("333.444#55").withTelephoneSecondaryHome("222 222 222");
 
     app.contact().create(contact);
     app.goTo().homePageBack();
