@@ -23,11 +23,8 @@ public class GroupDataGenerator {
   @Parameter (names = "-d", description = "DataFormat")
   public String format;
 
-
   public static void main(String[] args) throws IOException {
-
     GroupDataGenerator generator = new GroupDataGenerator();
-
     JCommander jCommander = new JCommander(generator);
     try{
     jCommander.parse(args);
@@ -36,12 +33,7 @@ public class GroupDataGenerator {
       jCommander.usage();
       return;
     }
-
   generator.run();
-
-
-
-
   }
 
   private void run() throws IOException {
@@ -56,9 +48,6 @@ public class GroupDataGenerator {
     }
 
   }
-
-
-
 
   private  List<GroupData> generateGroups(int count) {
 
