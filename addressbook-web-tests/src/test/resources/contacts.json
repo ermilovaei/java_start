@@ -10,25 +10,10 @@
     "telephoneMobile": "2323-232 2323.001",
     "telephoneWork": "333.444#55",
     "telephoneSecondaryHome": "222 222 222",
-    "bDate": "28",
-    "bMonth": "April",
-    "bYear": "1980",
-    "photo": "src/test/resources/pic.png"
-  },
-  {
-    "lastName": "Last Name2",
-    "firstName": "Contact Name 2",
-    "adress": "Street 2, 20",
-    "emailFirst": "err2@dd.tt",
-    "emailSecond": "email2.Second@rrr.rr",
-    "emailThird": "em_ai-l@Thi2.rd",
-    "telephoneHome": "+7(234)54 44",
-    "telephoneMobile": "2323-232 2323.002",
-    "telephoneWork": "333.444#55",
-    "telephoneSecondaryHome": "222 222 222",
-    "bDate": "28",
+    "bDate": 28,
     "bMonth": "April",
     "bYear": "1980",
     "photo": "src/test/resources/pic.png"
   }
+
 ]

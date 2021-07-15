@@ -77,7 +77,7 @@ public class ContactData {
   @Expose
   @Column(name ="photo")
   @Type(type = "text")
-  private String photo;
+  private String photo = "src/test/resources/pic.png";
 
   @Transient
   private String group;
@@ -200,6 +200,7 @@ public class ContactData {
     return this;
   }
 
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -224,40 +225,17 @@ public class ContactData {
             '}';
   }
 
-  public String toString(int bDate) {
-    return "ContactData{" +
-            "id=" + id +
-            ", lastName='" + lastName + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", adress='" + adress + '\'' +
-            ", emailFirst='" + emailFirst + '\'' +
-            ", emailSecond='" + emailSecond + '\'' +
-            ", emailThird='" + emailThird + '\'' +
-            ", allEmails='" + allEmails + '\'' +
-            ", allTelephones='" + allTelephones + '\'' +
-            ", telephoneHome='" + telephoneHome + '\'' +
-            ", telephoneMobile='" + telephoneMobile + '\'' +
-            ", telephoneWork='" + telephoneWork + '\'' +
-            ", telephoneSecondaryHome='" + telephoneSecondaryHome + '\'' +
-            ", bDate=" + this.bDate +
-            ", bMonth='" + bMonth + '\'' +
-            ", bYear='" + bYear + '\'' +
-            ", photo='" + photo + '\'' +
-            ", group='" + group + '\'' +
-            '}';
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return id == that.id && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName);
+    return bDate == that.bDate && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(adress, that.adress) && Objects.equals(emailFirst, that.emailFirst) && Objects.equals(emailSecond, that.emailSecond) && Objects.equals(emailThird, that.emailThird) && Objects.equals(allEmails, that.allEmails) && Objects.equals(allTelephones, that.allTelephones) && Objects.equals(telephoneHome, that.telephoneHome) && Objects.equals(telephoneMobile, that.telephoneMobile) && Objects.equals(telephoneWork, that.telephoneWork) && Objects.equals(telephoneSecondaryHome, that.telephoneSecondaryHome) && Objects.equals(bMonth, that.bMonth) && Objects.equals(bYear, that.bYear);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, lastName, firstName);
+    return Objects.hash(lastName, firstName, adress, emailFirst, emailSecond, emailThird, allEmails, allTelephones, telephoneHome, telephoneMobile, telephoneWork, telephoneSecondaryHome, bDate, bMonth, bYear);
   }
 
   public int getId() {
@@ -284,7 +262,7 @@ public class ContactData {
   }
 
   public String getbDate() {
-    return toString(bDate);
+    return Byte.toString(bDate);
   }
 
   public String getbMonth() {
