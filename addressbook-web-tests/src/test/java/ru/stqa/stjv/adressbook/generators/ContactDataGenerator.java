@@ -75,7 +75,7 @@ public class ContactDataGenerator {
               .withTelephoneHome("+7(234)54 44")
               .withTelephoneMobile(String.format("2323-232 2323.00%s",i))
               .withTelephoneWork("333.444#55").withTelephoneSecondaryHome("222 222 222")
-              .withPhoto("src/test/resources/pic.png"));
+              .withPhoto(new File("src/test/resources/pic.png")));
     }
     return contacts;
   }

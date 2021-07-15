@@ -1,51 +1,94 @@
 package ru.stqa.stjv.adressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
+import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name ="addressbook")
 public class ContactData {
+  @Id
+  @Column(name ="id")
   private  int id = Integer.MAX_VALUE;
   @Expose
+  @Column(name ="lastName")
   private  String lastName;
   @Expose
+  @Column(name ="firstName")
   private  String firstName;
   @Expose
+  @Column(name ="address")
+  @Type(type = "text")
   private  String adress;
   @Expose
+  @Column(name ="email")
+  @Type(type = "text")
   private  String emailFirst;
   @Expose
+  @Column(name ="email2")
+  @Type(type = "text")
   private  String emailSecond;
   @Expose
+  @Column(name ="email3")
+  @Type(type = "text")
   private  String emailThird;
 
+  @Transient
   private  String allEmails;
+  @Transient
   private  String allTelephones;
 
   @Expose
+  @Column(name ="home")
+  @Type(type = "text")
   private  String telephoneHome;
+
   @Expose
+  @Column(name ="mobile")
+  @Type(type = "text")
   private  String telephoneMobile;
+
   @Expose
+  @Column(name ="work")
+  @Type(type = "text")
   private  String telephoneWork;
+
   @Expose
+  @Column(name ="phone2")
+  @Type(type = "text")
   private  String telephoneSecondaryHome;
 
   @Expose
-  private  String bDate  = "31";
+  @Column(name ="bday")
+  @Type(type = "byte")
+  private  byte bDate  = 31;
+
   @Expose
+  @Column(name ="bmonth")
   private  String bMonth = "January";
+
   @Expose
+  @Column(name ="byear")
   private  String bYear = "1990";
+
   @Expose
+  @Column(name ="photo")
+  @Type(type = "text")
   private String photo;
 
-  public String getPhoto() {
-    return photo;
+  @Transient
+  private String group;
+
+
+  public File getPhoto() {
+    return new File(photo);
   }
 
-  public ContactData withPhoto(String photo) {
-    this.photo = photo;
+  public ContactData withPhoto(File photo) {
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -143,7 +186,7 @@ public class ContactData {
   }
 
   public ContactData withBDate(String bDate) {
-    this.bDate = bDate;
+    this.bDate = Byte.parseByte(bDate);
     return this;
   }
 
@@ -173,10 +216,34 @@ public class ContactData {
             ", telephoneMobile='" + telephoneMobile + '\'' +
             ", telephoneWork='" + telephoneWork + '\'' +
             ", telephoneSecondaryHome='" + telephoneSecondaryHome + '\'' +
-            ", bDate='" + bDate + '\'' +
+            ", bDate=" + bDate +
             ", bMonth='" + bMonth + '\'' +
             ", bYear='" + bYear + '\'' +
-            ", photo=" + photo +
+            ", photo='" + photo + '\'' +
+            ", group='" + group + '\'' +
+            '}';
+  }
+
+  public String toString(int bDate) {
+    return "ContactData{" +
+            "id=" + id +
+            ", lastName='" + lastName + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", adress='" + adress + '\'' +
+            ", emailFirst='" + emailFirst + '\'' +
+            ", emailSecond='" + emailSecond + '\'' +
+            ", emailThird='" + emailThird + '\'' +
+            ", allEmails='" + allEmails + '\'' +
+            ", allTelephones='" + allTelephones + '\'' +
+            ", telephoneHome='" + telephoneHome + '\'' +
+            ", telephoneMobile='" + telephoneMobile + '\'' +
+            ", telephoneWork='" + telephoneWork + '\'' +
+            ", telephoneSecondaryHome='" + telephoneSecondaryHome + '\'' +
+            ", bDate=" + this.bDate +
+            ", bMonth='" + bMonth + '\'' +
+            ", bYear='" + bYear + '\'' +
+            ", photo='" + photo + '\'' +
+            ", group='" + group + '\'' +
             '}';
   }
 
@@ -217,7 +284,7 @@ public class ContactData {
   }
 
   public String getbDate() {
-    return bDate;
+    return toString(bDate);
   }
 
   public String getbMonth() {
