@@ -34,7 +34,9 @@ public class ContactModificationTests extends TestBase {
     ContactData moifiedContact = before.iterator().next();
 
     ContactData contact = new ContactData().withId(moifiedContact.getId()).withLastName("new last").withFirstName("c name").
-                              withAdress("new street, 1, 1").withEmailSecond("e.rtt@d.yd.tt").withTelephoneWork("555 55 53").
+                              withAdress("new street, 1, 1").withEmailFirst("e.rtt@d.yd.tt").withEmailSecond("e.rtt@d.yd.tt").whithEmailThird("e.rtt@d.yd.tt")
+                              .withTelephoneWork("555 55 53").withTelephoneHome("555 55 53").withTelephoneMobile("555 55 53")
+                              .withTelephoneSecondaryHome("555 55 53").
                               withBDate("11").withBMonth("April").withBYear("1999");
 
 
@@ -43,6 +45,7 @@ public class ContactModificationTests extends TestBase {
     assertThat(app.contact().count(), equalTo(before.size()));
 
     Contacts after = app.db().contacts();
+    Contacts am = before.withOut(moifiedContact).withAdded(contact);
     MatcherAssert.assertThat(after,
             CoreMatchers.equalTo(before.withOut(moifiedContact).withAdded(contact)));
   }

@@ -54,7 +54,7 @@ public class ContactCreationTests extends TestBase{
     app.contact().create(contact);
     app.goTo().homePageBack();
 
-   // assertThat(app.contact().count(), equalTo(before.size()+1));
+   assertThat(app.contact().count(), equalTo(before.size()+1));
     Contacts after = app.db().contacts();
     System.out.println(after);
     assertThat(after, equalTo(before.withAdded(

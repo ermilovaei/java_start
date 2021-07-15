@@ -200,7 +200,6 @@ public class ContactData {
     return this;
   }
 
-
   @Override
   public String toString() {
     return "ContactData{" +
@@ -220,8 +219,6 @@ public class ContactData {
             ", bDate=" + bDate +
             ", bMonth='" + bMonth + '\'' +
             ", bYear='" + bYear + '\'' +
-            ", photo='" + photo + '\'' +
-            ", group='" + group + '\'' +
             '}';
   }
 
@@ -230,12 +227,18 @@ public class ContactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return bDate == that.bDate && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(adress, that.adress) && Objects.equals(emailFirst, that.emailFirst) && Objects.equals(emailSecond, that.emailSecond) && Objects.equals(emailThird, that.emailThird) && Objects.equals(allEmails, that.allEmails) && Objects.equals(allTelephones, that.allTelephones) && Objects.equals(telephoneHome, that.telephoneHome) && Objects.equals(telephoneMobile, that.telephoneMobile) && Objects.equals(telephoneWork, that.telephoneWork) && Objects.equals(telephoneSecondaryHome, that.telephoneSecondaryHome) && Objects.equals(bMonth, that.bMonth) && Objects.equals(bYear, that.bYear);
+    return id == that.id && bDate == that.bDate && Objects.equals(lastName, that.lastName)
+            && Objects.equals(firstName, that.firstName) && Objects.equals(adress, that.adress)
+            && Objects.equals(emailFirst, that.emailFirst) && Objects.equals(emailSecond, that.emailSecond)
+            && Objects.equals(emailThird, that.emailThird) && Objects.equals(telephoneHome, that.telephoneHome)
+            && Objects.equals(telephoneMobile, that.telephoneMobile) && Objects.equals(telephoneWork, that.telephoneWork)
+            && Objects.equals(telephoneSecondaryHome, that.telephoneSecondaryHome) && Objects.equals(bMonth, that.bMonth)
+            && Objects.equals(bYear, that.bYear);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lastName, firstName, adress, emailFirst, emailSecond, emailThird, allEmails, allTelephones, telephoneHome, telephoneMobile, telephoneWork, telephoneSecondaryHome, bDate, bMonth, bYear);
+    return Objects.hash(id, lastName, firstName, adress, emailFirst, emailSecond, emailThird, telephoneHome, telephoneMobile, telephoneWork, telephoneSecondaryHome, bDate, bMonth, bYear);
   }
 
   public int getId() {

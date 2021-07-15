@@ -40,9 +40,9 @@ public class DBHelper {
     List <ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00 00:00:00'" ).list();
     session.getTransaction().commit();
     session.close();
-    System.out.println(result);
+    //System.out.println(result);
     Contacts contacts = new Contacts(result);
-    System.out.println(contacts);
+   // System.out.println(contacts);
     return new Contacts(result);
   }
 
