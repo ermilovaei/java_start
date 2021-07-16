@@ -42,12 +42,12 @@ public class ContactDataTests extends TestBase{
 
   @Test
   public void testContactPones(){
-   assertThat(contact.getAllTelephones(), equalTo(mergePhones(contactInfoFromEditForm)));
+   assertThat(contact.getAllTelephones(), equalTo(contactInfoFromEditForm.mergePhones(contactInfoFromEditForm)));
   }
 
   @Test
   public void testContactEmails(){
-    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+    assertThat(contact.getAllEmails(), equalTo(contactInfoFromEditForm.mergeEmails(contactInfoFromEditForm)));
   }
 
   @Test
@@ -56,23 +56,7 @@ public class ContactDataTests extends TestBase{
 
   }
 
-  private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getTelephoneHome(),
-            contact.getTelephoneMobile(),
-            contact.getTelephoneWork(),
-            contact.getTelephoneSecondaryHome())
-            .stream().filter((s) -> ! s.equals(""))
-            .map(ContactDataTests::clened)
-            .collect(Collectors.joining("\n"));
-  }
 
-  private String mergeEmails(ContactData contact) {
-    return Arrays.asList(contact.getEmailFirst(),
-            contact.getEmailSecond(),
-            contact.getEmailThird())
-            .stream().filter((s) -> ! s.equals(""))
-            .collect(Collectors.joining("\n"));
-  }
 
   public static String clened (String phone) {
     return phone.replaceAll("/s","").replaceAll("[-().( )]","");

@@ -2,10 +2,13 @@ package ru.stqa.stjv.adressbook.model;
 
 import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
+import ru.stqa.stjv.adressbook.tests.ContactDataTests;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name ="addressbook")
@@ -240,6 +243,27 @@ public class ContactData {
   public int hashCode() {
     return Objects.hash(id, lastName, firstName, adress, emailFirst, emailSecond, emailThird, telephoneHome, telephoneMobile, telephoneWork, telephoneSecondaryHome, bDate, bMonth, bYear);
   }
+
+
+
+  public String mergePhones(ContactData contact) {
+    return Arrays.asList(contact.getTelephoneHome(),
+            contact.getTelephoneMobile(),
+            contact.getTelephoneWork(),
+            contact.getTelephoneSecondaryHome())
+            .stream().filter((s) -> ! s.equals(""))
+            .map(ContactDataTests::clened)
+            .collect(Collectors.joining("\n"));
+  }
+
+  public String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmailFirst(),
+            contact.getEmailSecond(),
+            contact.getEmailThird())
+            .stream().filter((s) -> ! s.equals(""))
+            .collect(Collectors.joining("\n"));
+  }
+
 
   public int getId() {
     return id;

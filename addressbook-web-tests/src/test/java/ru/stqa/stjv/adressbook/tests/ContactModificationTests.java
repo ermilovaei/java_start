@@ -48,6 +48,8 @@ public class ContactModificationTests extends TestBase {
     Contacts am = before.withOut(moifiedContact).withAdded(contact);
     MatcherAssert.assertThat(after,
             CoreMatchers.equalTo(before.withOut(moifiedContact).withAdded(contact)));
+
+    verifyContactListInUI();
   }
 
 
