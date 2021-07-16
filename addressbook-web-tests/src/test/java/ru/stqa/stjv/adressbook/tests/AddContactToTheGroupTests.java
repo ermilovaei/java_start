@@ -1,0 +1,76 @@
+package ru.stqa.stjv.adressbook.tests;
+
+import com.google.common.base.CharMatcher;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import ru.stqa.stjv.adressbook.model.ContactData;
+import ru.stqa.stjv.adressbook.model.Contacts;
+import ru.stqa.stjv.adressbook.model.GroupData;
+import ru.stqa.stjv.adressbook.model.Groups;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+
+public class AddContactToTheGroupTests extends TestBase{
+
+  @BeforeMethod
+  private void ensurePreconditions() {
+    if (app.db().groups().size() == 0) {
+      app.goTo().GroupsPage();
+      app.group().create(new GroupData()
+              .withName("group for Contact").withHeader("test group header").withFooter("new group footer"));
+    }
+
+    if (app.db().contacts().size() == 0)
+    {
+      app.goTo().ContactsPage();
+      app.contact().create(new
+              ContactData().withLastName("contact last").withFirstName("contact to add group").
+              withAdress("street, 1, 1").withEmailFirst("err@dd.tt")
+              .withEmailSecond("e.rtt@d.yd.tt").whithEmailThird("e.rtt@d.yd.tt")
+              .withTelephoneWork("555 55 53").withTelephoneHome("23454333").withTelephoneMobile("555 55 53")
+              .withTelephoneSecondaryHome("555 55 53").
+                      withBDate("28").withBMonth("April").withBYear("1980"));
+      app.goTo().homePageBack();
+    }
+
+  }
+
+
+@Test
+  public void testAddContactToTheGroup() {
+
+    ContactData contactToAdd = app.db().contacts().iterator().next();
+    //Contacts allContacts = app.db().contacts();
+  GroupData groupForContact = new GroupData();
+
+  Groups allGroups = app.db().groups();
+  Groups contactGroups = contactToAdd.getGroups();
+
+
+    if (app.db().groups().size() == contactToAdd.getGroups().size())
+    {
+        app.goTo().GroupsPage();
+        app.group().create(new GroupData()
+                .withName("group for Contact").withHeader("test group header").withFooter("new group footer"));
+    }
+
+    allGroups = app.db().groups();
+    for (GroupData group : app.db().groups())
+    {
+      if  (! contactToAdd.getGroups().contains(group))
+      {
+        groupForContact = group;
+        break;
+      }
+    }
+  app.goTo().ContactsPage();
+  app.contact().addContactToTheGroup(contactToAdd,groupForContact);
+
+   contactGroups = contactToAdd.getGroups();
+  assertThat(contactToAdd.getGroups(), hasItem(groupForContact));
+
+  }
+}

@@ -20,7 +20,10 @@ public class ContactModificationTests extends TestBase {
     {
       app.contact().create(new
               ContactData().withLastName("contact last").withFirstName("contact").
-              withAdress("street, 1, 1").withEmailFirst("err@dd.tt").withTelephoneHome("23454333").
+              withAdress("street, 1, 1").withEmailFirst("err@dd.tt")
+              .withEmailSecond("e.rtt@d.yd.tt").whithEmailThird("e.rtt@d.yd.tt")
+              .withTelephoneWork("555 55 53").withTelephoneHome("23454333").withTelephoneMobile("555 55 53")
+              .withTelephoneSecondaryHome("555 55 53").
               withBDate("28").withBMonth("April").withBYear("1980"));
       app.goTo().homePageBack();
 

@@ -4,8 +4,10 @@ package ru.stqa.stjv.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
+import ru.stqa.stjv.adressbook.model.GroupData;
 
 import java.util.List;
 
@@ -145,4 +147,26 @@ public class ContactHelper extends HelperBase {
             .withTelephoneWork(telephoneWork).withTelephoneSecondaryHome(telephoneSecondaryHome);
 
   }
+
+  public void addContactToTheGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    wd.findElement(By.name("to_group")).click();
+    int id = group.getId();
+    new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(group.getId()));
+    wd.findElement(By.name("add")).click();
+    //wd.findElement(By.linkText("group page " + group.getName()+ "\"")).click();
+  }
+
+  public void deleteContactFromTheGroup (ContactData contact, GroupData group) {
+    wd.findElement(By.name("group")).click();
+    new Select(wd.findElement(By.name("group"))).selectByValue(Integer.toString(group.getId()));
+    wd.findElement(By.name("group")).click();
+    wd.findElement(By.id(Integer.toString(contact.getId()))).click();
+    wd.findElement(By.name("remove")).click();
+
+
+
+  }
+
+
 }

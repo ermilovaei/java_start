@@ -7,7 +7,9 @@ import ru.stqa.stjv.adressbook.tests.ContactDataTests;
 import javax.persistence.*;
 import java.io.File;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -82,9 +84,15 @@ public class ContactData {
   @Type(type = "text")
   private String photo = "src/test/resources/pic.png";
 
-  @Transient
-  private String group;
+  @ManyToMany (fetch = FetchType.EAGER)
+  @JoinTable (name ="address_in_groups",
+          joinColumns = @JoinColumn (name="id"),
+          inverseJoinColumns = @JoinColumn (name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
+  public Groups getGroups() {
+    return new  Groups(groups);
+  }
 
   public File getPhoto() {
     return new File(photo);
@@ -299,6 +307,7 @@ public class ContactData {
   public String getbYear() {
     return bYear;
   }
+
 
 
 }
