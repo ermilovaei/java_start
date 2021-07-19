@@ -42,15 +42,16 @@ public class AddContactToTheGroupTests extends TestBase{
 @Test
   public void testAddContactToTheGroup() {
 
-    ContactData contactToAdd = app.db().contacts().iterator().next();
+    ContactData contactAdded = app.db().contacts().iterator().next();
     //Contacts allContacts = app.db().contacts();
+  int idContactAdded = contactAdded.getId();
   GroupData groupForContact = new GroupData();
 
   Groups allGroups = app.db().groups();
-  Groups contactGroups = contactToAdd.getGroups();
+  Groups contactGroups = contactAdded.getGroups();
 
 
-    if (app.db().groups().size() == contactToAdd.getGroups().size())
+    if (app.db().groups().size() == contactAdded.getGroups().size())
     {
         app.goTo().GroupsPage();
         app.group().create(new GroupData()
@@ -60,17 +61,24 @@ public class AddContactToTheGroupTests extends TestBase{
     allGroups = app.db().groups();
     for (GroupData group : app.db().groups())
     {
-      if  (! contactToAdd.getGroups().contains(group))
+      if  (! contactAdded.getGroups().contains(group))
       {
         groupForContact = group;
         break;
       }
     }
   app.goTo().ContactsPage();
-  app.contact().addContactToTheGroup(contactToAdd,groupForContact);
+  app.contact().addContactToTheGroup(contactAdded,groupForContact);
 
-   contactGroups = contactToAdd.getGroups();
-  assertThat(contactToAdd.getGroups(), hasItem(groupForContact));
+  Contacts allContacts = app.db().contacts();
+
+  for (ContactData contact: allContacts) {
+    if (contact.getId() == idContactAdded) {
+      contactAdded = contact;
+      break;
+    }
+  }
+  assertThat(contactAdded.getGroups(), hasItem(groupForContact));
 
   }
 }
