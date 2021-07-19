@@ -1,14 +1,15 @@
 package ru.stqa.stjv.adressbook.tests;
 
-import com.google.common.base.CharMatcher;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.stjv.adressbook.model.*;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
 import ru.stqa.stjv.adressbook.model.GroupData;
 import ru.stqa.stjv.adressbook.model.Groups;
+
+
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -42,14 +43,9 @@ public class AddContactToTheGroupTests extends TestBase{
 @Test
   public void testAddContactToTheGroup() {
 
-    ContactData contactAdded = app.db().contacts().iterator().next();
-    //Contacts allContacts = app.db().contacts();
+  ContactData contactAdded = app.db().contacts().iterator().next();
   int idContactAdded = contactAdded.getId();
   GroupData groupForContact = new GroupData();
-
-  Groups allGroups = app.db().groups();
-  Groups contactGroups = contactAdded.getGroups();
-
 
     if (app.db().groups().size() == contactAdded.getGroups().size())
     {
@@ -58,7 +54,7 @@ public class AddContactToTheGroupTests extends TestBase{
                 .withName("group for Contact").withHeader("test group header").withFooter("new group footer"));
     }
 
-    allGroups = app.db().groups();
+
     for (GroupData group : app.db().groups())
     {
       if  (! contactAdded.getGroups().contains(group))

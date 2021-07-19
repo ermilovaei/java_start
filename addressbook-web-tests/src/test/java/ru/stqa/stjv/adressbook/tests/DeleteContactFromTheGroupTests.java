@@ -1,10 +1,15 @@
 package ru.stqa.stjv.adressbook.tests;
 
+import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
 import ru.stqa.stjv.adressbook.model.GroupData;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DeleteContactFromTheGroupTests extends TestBase {
 
@@ -37,14 +42,31 @@ public class DeleteContactFromTheGroupTests extends TestBase {
   @Test
   public void testDeleteContactFromTheGroup() {
 
-    ContactData contactToDeleteFromGroup  = app.db().contacts().iterator().next();
-    if (contactToDeleteFromGroup.getGroups().size() == 0)
+    ContactData contactRemoved  = app.db().contacts().iterator().next();
+    int idContactRemoved = contactRemoved.getId();
+    if (contactRemoved.getGroups().size() == 0)
     {
       app.goTo().ContactsPage();
-      app.contact().addContactToTheGroup(contactToDeleteFromGroup, app.db().groups().iterator().next());
+
+      app.contact().addContactToTheGroup(contactRemoved, app.db().groups().iterator().next());
     }
+
+    GroupData groupToRemoveContact = contactRemoved.getGroups().iterator().next();
+
     app.goTo().ContactsPage();
-    app.contact().deleteContactFromTheGroup(contactToDeleteFromGroup, app.db().groups().iterator().next());
+    
+    app.contact().deleteContactFromTheGroup(contactRemoved, groupToRemoveContact);
+
+    Contacts allContacts = app.db().contacts();
+
+    for (ContactData contact: allContacts) {
+      if (contact.getId() == idContactRemoved) {
+        contactRemoved = contact;
+        break;
+      }
+    }
+
+    assertThat(contactRemoved.getGroups(), not(hasItem(groupToRemoveContact)));
 
   }
 
