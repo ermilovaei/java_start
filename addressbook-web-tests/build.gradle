@@ -10,20 +10,36 @@ dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-3'
     implementation 'org.hamcrest:hamcrest:2.2'
+    implementation 'com.beust:jcommander:1.48'
+    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'mysql:mysql-connector-java:8.0.25'
+    implementation 'org.hibernate:hibernate-core:5.5.3.Final'
 
 }
 
-test {
+task testGroups (type: Test) {
     useTestNG
             {
-                suites '/src/test/resources/testng.xml'
+                suites '/src/test/resources/testng-groups.xml'
             }
-if (project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-if (project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
 
 
+}
+task testContacts (type: Test) {
+    useTestNG
+            {
+                suites '/src/test/resources/testng-contacts.xml'
+            }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
 }
