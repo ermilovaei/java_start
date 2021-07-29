@@ -54,7 +54,7 @@ public class DeleteContactFromTheGroupTests extends TestBase {
     GroupData groupToRemoveContact = contactRemoved.getGroups().iterator().next();
 
     app.goTo().ContactsPage();
-    
+
     app.contact().deleteContactFromTheGroup(contactRemoved, groupToRemoveContact);
 
     Contacts allContacts = app.db().contacts();
