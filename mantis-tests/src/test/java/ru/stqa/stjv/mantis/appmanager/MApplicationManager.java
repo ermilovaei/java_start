@@ -11,14 +11,27 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager {
+public class MApplicationManager {
   private final String browser;
   private final Properties properties;
   WebDriver wd;
+  private MSessionHelper sessionHelper;
+  private MNavigationHelper navigationHelper;
+
+  public Properties getProperties() {
+    return properties;
+  }
+
+  public MSessionHelper session() {
+    return sessionHelper;
+  }
 
 
+  public MNavigationHelper goTo() {
+    return navigationHelper;
+  }
 
-  public ApplicationManager(String browser) {
+  public MApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
   }
@@ -38,6 +51,8 @@ public class ApplicationManager {
 
 
     wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    sessionHelper = new MSessionHelper(wd);
+    wd.get(properties.getProperty("web.baseUrl", "http://localhost/mantisbt-1.3.20/mantisbt-1.3.20/"));
 
   }
 
