@@ -17,10 +17,14 @@ public class MApplicationManager {
   WebDriver wd;
   private MSessionHelper sessionHelper;
   private MNavigationHelper navigationHelper;
+  private MAdminHelper adminHelper;
+  private MMailHelper mailHelper;
+  private MHttpSession httpSession;
 
-  public Properties getProperties() {
-    return properties;
+  public MAdminHelper admin() {
+    return adminHelper;
   }
+
 
   public MSessionHelper session() {
     return sessionHelper;
@@ -52,13 +56,32 @@ public class MApplicationManager {
 
     wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     sessionHelper = new MSessionHelper(wd);
+    navigationHelper = new MNavigationHelper(wd);
+    adminHelper = new MAdminHelper(wd);
     wd.get(properties.getProperty("web.baseUrl", "http://localhost/mantisbt-1.3.20/mantisbt-1.3.20/"));
 
   }
+
+
+ public MMailHelper mail() {
+    if (mailHelper == null)
+    {
+      mailHelper = new MMailHelper(this);
+    }
+    return mailHelper;
+  }
+
+public MHttpSession newSession() {
+    return new MHttpSession(this);
+}
+
 
   public void stop() {
     wd.quit();
   }
 
 
+  public String getProperties(String key) {
+   return properties.getProperty(key);
+  }
 }
