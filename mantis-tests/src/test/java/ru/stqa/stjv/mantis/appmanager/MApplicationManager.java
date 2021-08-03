@@ -20,6 +20,7 @@ public class MApplicationManager {
   private MAdminHelper adminHelper;
   private MMailHelper mailHelper;
   private MHttpSession httpSession;
+  private SoapHelper soapHelper;
 
   public MAdminHelper admin() {
     return adminHelper;
@@ -69,6 +70,14 @@ public class MApplicationManager {
       mailHelper = new MMailHelper(this);
     }
     return mailHelper;
+  }
+
+  public SoapHelper soap() {
+    if (soapHelper == null)
+    {
+      soapHelper= new SoapHelper(this);
+    }
+    return soapHelper;
   }
 
 public MHttpSession newSession() {

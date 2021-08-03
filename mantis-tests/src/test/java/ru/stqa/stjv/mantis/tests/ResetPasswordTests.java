@@ -36,7 +36,7 @@ public class ResetPasswordTests extends MTestBase {
    // app.session().login(userLogin, newPassword);
     MHttpSession httpSession = app.newSession();
     Assert.assertTrue(httpSession.login(userLogin, newPassword));
-   
+
     Assert.assertTrue(httpSession.isLoggedInAs(userLogin));
   }
 
