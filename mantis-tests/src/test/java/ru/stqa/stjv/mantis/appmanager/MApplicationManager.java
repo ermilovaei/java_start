@@ -41,6 +41,10 @@ public class MApplicationManager {
     properties = new Properties();
   }
 
+  public Properties getProperties() {
+    return properties;
+  }
+
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
 

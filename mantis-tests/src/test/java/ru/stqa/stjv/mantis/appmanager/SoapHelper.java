@@ -28,9 +28,11 @@ public Set<Project> getProjects() throws MalformedURLException, ServiceException
 }
 
   private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+    String webService = app.getProperties().getProperty("web.pmsConnect", "http://localhost/mantisbt-2.25.2/mantisbt-2.25.2/api/soap/mantisconnect.php");
+
     MantisConnectPortType mc = new MantisConnectLocator()
             .getMantisConnectPort(new
-                    URL("http://localhost/mantisbt-2.25.2/mantisbt-2.25.2/api/soap/mantisconnect.php"));
+                    URL(webService));
     return mc;
   }
 
