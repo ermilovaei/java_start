@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
-import ru.stqa.stjv.adressbook.model.groupData;
+import ru.stqa.stjv.adressbook.model.GroupData;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -16,7 +16,7 @@ public class DeleteContactFromTheGroupTests extends TestBase {
   private void ensurePreconditions() {
     if (app.db().groups().size() == 0) {
       app.goTo().GroupsPage();
-      app.group().create(new groupData()
+      app.group().create(new GroupData()
               .withName("group to del Contact").withHeader("test group header").withFooter("new group footer"));
     }
     app.goTo().ContactsPage();
@@ -50,7 +50,7 @@ public class DeleteContactFromTheGroupTests extends TestBase {
       app.contact().addContactToTheGroup(contactRemoved, app.db().groups().iterator().next());
     }
 
-    groupData groupToRemoveContact = contactRemoved.getGroups().iterator().next();
+    GroupData groupToRemoveContact = contactRemoved.getGroups().iterator().next();
 
     app.goTo().ContactsPage();
 

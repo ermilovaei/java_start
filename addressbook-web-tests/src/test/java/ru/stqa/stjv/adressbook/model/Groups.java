@@ -6,32 +6,32 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Groups extends ForwardingSet<groupData> {
-  private Set<groupData> delegate;
+public class Groups extends ForwardingSet<GroupData> {
+  private Set<GroupData> delegate;
 
   public Groups(Groups groups) {
-    this.delegate = new HashSet<groupData>(groups.delegate) ;
+    this.delegate = new HashSet<GroupData>(groups.delegate) ;
 
   }
 
   public Groups() {
-    this.delegate = new HashSet<groupData>();
+    this.delegate = new HashSet<GroupData>();
   }
 
-  public Groups(Collection<groupData> groups) {
-    this.delegate = new HashSet<groupData>(groups) ;
+  public Groups(Collection<GroupData> groups) {
+    this.delegate = new HashSet<GroupData>(groups) ;
   }
 
   @Override
-  protected Set<groupData> delegate() {
+  protected Set<GroupData> delegate() {
     return delegate;
   }
-  public Groups withAdded(groupData group) {
+  public Groups withAdded(GroupData group) {
     Groups groups = new Groups(this);
     groups.add(group);
     return groups;
   }
-  public Groups withOut(groupData group) {
+  public Groups withOut(GroupData group) {
     Groups groups = new Groups(this);
     groups.remove(group);
     return groups;

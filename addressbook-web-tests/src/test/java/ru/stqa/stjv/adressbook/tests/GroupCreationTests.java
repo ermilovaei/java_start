@@ -5,7 +5,7 @@ import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.stjv.adressbook.model.groupData;
+import ru.stqa.stjv.adressbook.model.GroupData;
 import ru.stqa.stjv.adressbook.model.Groups;
 
 
@@ -37,14 +37,14 @@ public class GroupCreationTests extends TestBase{
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<groupData> groups = gson.fromJson(json, new TypeToken<List<groupData>>() {
+      List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
       }.getType());
       return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test (dataProvider = "validGroupsFromJson")
-  public void testGroupCreation(groupData group) throws Exception {
+  public void testGroupCreation(GroupData group) throws Exception {
 
     app.goTo().GroupsPage();
     Groups before = app.db().groups();

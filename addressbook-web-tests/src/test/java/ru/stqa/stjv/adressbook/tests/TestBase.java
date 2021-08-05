@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeSuite;
 import ru.stqa.stjv.adressbook.appmanager.ApplicationManager;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
-import ru.stqa.stjv.adressbook.model.groupData;
+import ru.stqa.stjv.adressbook.model.GroupData;
 import ru.stqa.stjv.adressbook.model.Groups;
 
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ public class TestBase {
       Groups dbGroups = app.db().groups();
       Groups uiGroups = app.group().all();
       assertThat(uiGroups, equalTo(dbGroups.stream()
-              .map((g) -> new groupData().withId(g.getId()).withName(g.getName()))
+              .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
               .collect(Collectors.toSet())));
     }
   }

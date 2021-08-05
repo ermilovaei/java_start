@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.stjv.adressbook.model.groupData;
+import ru.stqa.stjv.adressbook.model.GroupData;
 import ru.stqa.stjv.adressbook.model.Groups;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,7 +19,7 @@ public class GroupDeletionTests extends TestBase{
   private void ensurePreconditions() {
     app.goTo().GroupsPage();
     if (app.db().groups().size() == 0){
-      app.group().create(new groupData().withName("group name").withHeader("test group header").withFooter("test group footer"));
+      app.group().create(new GroupData().withName("group name").withHeader("test group header").withFooter("test group footer"));
     }
 
   }
@@ -27,7 +27,7 @@ public class GroupDeletionTests extends TestBase{
   @Test
   public void testGroupDeletion() throws Exception {
     Groups before = app.db().groups();
-    groupData deletedGroup = before.iterator().next();
+    GroupData deletedGroup = before.iterator().next();
 
     app.group().delete(deletedGroup);
     assertThat(app.group().count(), equalTo(before.size() - 1));
