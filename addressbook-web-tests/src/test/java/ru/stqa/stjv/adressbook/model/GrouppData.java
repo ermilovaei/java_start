@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table (name ="group_list")
-public class GroupData {
+public class GrouppData {
   @Id
   @Column  (name ="group_id")
   private int id = Integer.MAX_VALUE;;
@@ -32,22 +32,22 @@ public class GroupData {
     return new Contacts(contacts);
   }
 
-  public GroupData withId(int id) {
+  public GrouppData withId(int id) {
     this.id = id;
     return this;
   }
 
-  public GroupData withName(String name) {
+  public GrouppData withName(String name) {
     this.name = name;
     return this;
   }
 
-  public GroupData withHeader(String header) {
+  public GrouppData withHeader(String header) {
     this.header = header;
     return this;
   }
 
-  public GroupData withFooter(String footer) {
+  public GrouppData withFooter(String footer) {
     this.footer = footer;
     return this;
   }
@@ -56,7 +56,7 @@ public class GroupData {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    GroupData groupData = (GroupData) o;
+    GrouppData groupData = (GrouppData) o;
     return id == groupData.id && Objects.equals(name, groupData.name) && Objects.equals(header, groupData.header) && Objects.equals(footer, groupData.footer);
   }
 

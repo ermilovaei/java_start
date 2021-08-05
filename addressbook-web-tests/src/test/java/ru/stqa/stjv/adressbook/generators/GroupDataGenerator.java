@@ -5,7 +5,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.stqa.stjv.adressbook.model.GroupData;
+import ru.stqa.stjv.adressbook.model.GrouppData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -37,7 +37,7 @@ public class GroupDataGenerator {
   }
 
   private void run() throws IOException {
-    List<GroupData> groups = generateGroups(count);
+    List<GrouppData> groups = generateGroups(count);
 
     if (format.equals("csv")){
     saveAsCsv(groups,new File(file));}
@@ -49,26 +49,26 @@ public class GroupDataGenerator {
 
   }
 
-  private  List<GroupData> generateGroups(int count) {
+  private  List<GrouppData> generateGroups(int count) {
 
-    List<GroupData> groups = new ArrayList<GroupData>();
+    List<GrouppData> groups = new ArrayList<GrouppData>();
     for (int i = 1; i <= count; i++){
-      groups.add(new GroupData().withName(String.format("Group Name %s", i))
+      groups.add(new GrouppData().withName(String.format("Group Name %s", i))
               .withFooter(String.format("Footer Name %s", i))
               .withHeader(String.format("Header Name %s", i)));
     }
     return groups;
   }
 
-  private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
+  private void saveAsCsv(List<GrouppData> groups, File file) throws IOException {
     try (Writer writer = new FileWriter(file)) {
-      for (GroupData group : groups) {
+      for (GrouppData group : groups) {
         writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
       }
     }
   }
 
-  private void saveAsJson(List<GroupData> groups, File file) throws IOException {
+  private void saveAsJson(List<GrouppData> groups, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(groups);
     try (Writer writer = new FileWriter(file)){
