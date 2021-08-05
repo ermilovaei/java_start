@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
-import ru.stqa.stjv.adressbook.model.GrouppData;
+import ru.stqa.stjv.adressbook.model.GroupData;
 
 
 import static org.hamcrest.CoreMatchers.*;
@@ -17,7 +17,7 @@ public class AddContactToTheGroupTests extends TestBase{
   private void ensurePreconditions() {
     if (app.db().groups().size() == 0) {
       app.goTo().GroupsPage();
-      app.group().create(new GrouppData()
+      app.group().create(new GroupData()
               .withName("group for Contact").withHeader("test group header").withFooter("new group footer"));
     }
 
@@ -42,17 +42,17 @@ public class AddContactToTheGroupTests extends TestBase{
 
   ContactData contactAdded = app.db().contacts().iterator().next();
   int idContactAdded = contactAdded.getId();
-  GrouppData groupForContact = new GrouppData();
+  GroupData groupForContact = new GroupData();
 
     if (app.db().groups().size() == contactAdded.getGroups().size())
     {
         app.goTo().GroupsPage();
-        app.group().create(new GrouppData()
+        app.group().create(new GroupData()
                 .withName("group for Contact").withHeader("test group header").withFooter("new group footer"));
     }
 
 
-    for (GrouppData group : app.db().groups())
+    for (GroupData group : app.db().groups())
     {
       if  (! contactAdded.getGroups().contains(group))
       {

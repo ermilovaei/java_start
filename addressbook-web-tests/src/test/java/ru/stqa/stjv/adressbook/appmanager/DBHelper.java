@@ -7,7 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
-import ru.stqa.stjv.adressbook.model.GrouppData;
+import ru.stqa.stjv.adressbook.model.GroupData;
 import ru.stqa.stjv.adressbook.model.Groups;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class DBHelper {
   public Groups groups(){
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List <GrouppData> result = session.createQuery( "from GroupData" ).list();
+    List <GroupData> result = session.createQuery( "from GroupData" ).list();
     session.getTransaction().commit();
     session.close();
     return new Groups(result);

@@ -41,7 +41,7 @@
     <!-- Names the annotated entity class -->
 
 
-    <mapping class="ru.stqa.stjv.adressbook.model.GrouppData"/>
+    <mapping class="ru.stqa.stjv.adressbook.model.GroupData"/>
     <mapping class="ru.stqa.stjv.adressbook.model.ContactData"/>
 
 </session-factory>
