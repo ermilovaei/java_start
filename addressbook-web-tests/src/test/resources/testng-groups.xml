@@ -3,9 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Groups" >
         <classes>
-            <class name="ru.stqa.stjv.adressbook.ru.stqa.stjv.mantis.tests.GroupCreationTests" />
-            <class name="ru.stqa.stjv.adressbook.ru.stqa.stjv.mantis.tests.GroupDeletionTests" />
-            <class name="ru.stqa.stjv.adressbook.ru.stqa.stjv.mantis.tests.GroupModificationTests" />
+            <class name="ru.stqa.stjv.adressbook.tests.GroupCreationTests" />
+            <class name="ru.stqa.stjv.adressbook.tests.GroupDeletionTests" />
+            <class name="ru.stqa.stjv.adressbook.tests.GroupModificationTests" />
         </classes>
     </test>
 

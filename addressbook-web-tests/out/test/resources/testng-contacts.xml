@@ -4,10 +4,10 @@
 
     <test name="Contacts">
         <classes>
-            <class name="ru.stqa.stjv.adressbook.tests.ContactCreationTests" />
-            <class name="ru.stqa.stjv.adressbook.tests.ContactDataTests" />
-            <class name="ru.stqa.stjv.adressbook.tests.ContactModificationTests" />
-            <class name="ru.stqa.stjv.adressbook.tests.ContactDeletionTests" />
+            <class name="ru.stqa.stjv.adressbook.ru.stqa.stjv.mantis.tests.ContactCreationTests" />
+            <class name="ru.stqa.stjv.adressbook.ru.stqa.stjv.mantis.tests.ContactDataTests" />
+            <class name="ru.stqa.stjv.adressbook.ru.stqa.stjv.mantis.tests.ContactModificationTests" />
+            <class name="ru.stqa.stjv.adressbook.ru.stqa.stjv.mantis.tests.ContactDeletionTests" />
         </classes>
     </test>
 </suite>
