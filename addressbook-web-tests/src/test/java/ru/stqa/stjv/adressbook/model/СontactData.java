@@ -88,7 +88,7 @@ public class ContactData {
   @JoinTable (name ="address_in_groups",
           joinColumns = @JoinColumn (name="id"),
           inverseJoinColumns = @JoinColumn (name = "group_id"))
-  private Set<GroupData> groups = new HashSet<GroupData>();
+  private Set<groupData> groups = new HashSet<groupData>();
 
   public Groups getGroups() {
     return new  Groups(groups);

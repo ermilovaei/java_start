@@ -6,10 +6,9 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.stqa.stjv.adressbook.model.ContactData;
-import ru.stqa.stjv.adressbook.model.GroupData;
+import ru.stqa.stjv.adressbook.model.groupData;
 
 import java.util.List;
 
@@ -41,8 +40,8 @@ public class HbConnectionTest
 
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List <GroupData> result = session.createQuery( "from GroupData" ).list();
-    for ( GroupData group : result ) {
+    List <groupData> result = session.createQuery( "from GroupData" ).list();
+    for ( groupData group : result ) {
       System.out.println(group);
     }
     session.getTransaction().commit();

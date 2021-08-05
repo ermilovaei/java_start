@@ -1,7 +1,6 @@
 package ru.stqa.stjv.adressbook.model;
 
 import com.google.gson.annotations.Expose;
-import net.bytebuddy.build.ToStringPlugin;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -11,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table (name ="group_list")
-public class GroupData {
+public class groupData {
   @Id
   @Column  (name ="group_id")
   private int id = Integer.MAX_VALUE;;
@@ -33,22 +32,22 @@ public class GroupData {
     return new Contacts(contacts);
   }
 
-  public GroupData withId(int id) {
+  public groupData withId(int id) {
     this.id = id;
     return this;
   }
 
-  public GroupData withName(String name) {
+  public groupData withName(String name) {
     this.name = name;
     return this;
   }
 
-  public GroupData withHeader(String header) {
+  public groupData withHeader(String header) {
     this.header = header;
     return this;
   }
 
-  public GroupData withFooter(String footer) {
+  public groupData withFooter(String footer) {
     this.footer = footer;
     return this;
   }
@@ -57,7 +56,7 @@ public class GroupData {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    GroupData groupData = (GroupData) o;
+    groupData groupData = (ru.stqa.stjv.adressbook.model.groupData) o;
     return id == groupData.id && Objects.equals(name, groupData.name) && Objects.equals(header, groupData.header) && Objects.equals(footer, groupData.footer);
   }
 

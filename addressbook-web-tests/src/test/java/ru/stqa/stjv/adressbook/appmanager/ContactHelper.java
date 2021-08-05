@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.stjv.adressbook.model.ContactData;
 import ru.stqa.stjv.adressbook.model.Contacts;
-import ru.stqa.stjv.adressbook.model.GroupData;
+import ru.stqa.stjv.adressbook.model.groupData;
 
 import java.util.List;
 
@@ -148,7 +148,7 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void addContactToTheGroup(ContactData contact, GroupData group) {
+  public void addContactToTheGroup(ContactData contact, groupData group) {
     selectContactById(contact.getId());
     wd.findElement(By.name("to_group")).click();
     int id = group.getId();
@@ -157,7 +157,7 @@ public class ContactHelper extends HelperBase {
     //wd.findElement(By.linkText("group page " + group.getName()+ "\"")).click();
   }
 
-  public void deleteContactFromTheGroup (ContactData contact, GroupData group) {
+  public void deleteContactFromTheGroup (ContactData contact, groupData group) {
     wd.findElement(By.name("group")).click();
     new Select(wd.findElement(By.name("group"))).selectByValue(Integer.toString(group.getId()));
     wd.findElement(By.name("group")).click();
